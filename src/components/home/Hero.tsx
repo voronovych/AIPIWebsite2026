@@ -4,8 +4,19 @@ import aipiLogo from "@/assets/AiPilogo-white.png";
 
 export default function Hero() {
   return (
-    <section className="bg-[#0c1425] pt-36 pb-28 sm:pt-48 sm:pb-36">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="relative overflow-hidden pt-36 pb-28 sm:pt-48 sm:pb-36">
+      {/* Background image slot — replace src with your image */}
+      {/* <Image
+        src={heroBg}
+        alt=""
+        fill
+        className="object-cover object-center"
+        priority
+      /> */}
+      {/* Fallback dark overlay so text stays readable */}
+      <div className="absolute inset-0 bg-[#0c1425]/80" />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid items-center gap-12 lg:grid-cols-[1fr_3fr]">
           <div className="hidden lg:flex items-center justify-start -ml-4">
             <Image
