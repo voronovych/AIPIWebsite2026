@@ -15,6 +15,7 @@ html {
 body {
   background: #0c1425;
   color: #f8fafc;
+  zoom: 0.67;
 }
 
 @keyframes scroll {
