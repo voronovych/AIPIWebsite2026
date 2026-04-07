@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 const services = [
   {
     title: "Technology",
-    tagline: "Develop, scale, and monetize your IP",
+    tagline: "Develop, scale, and monetize your patents",
     description:
-      "Develop, scale, and monetize your products, services, and IP with our world-first Growth Landscaping and AI-driven analyses.",
+      "Develop, scale, and monetize your products, services, and patents with our world-first Growth Landscaping and AI-driven analyses.",
     bullets: [
       {
         label: "Differentiate",
@@ -27,7 +27,7 @@ const services = [
       {
         label: "Develop",
         detail:
-          "Use IP intelligence to inform R&D strategy and accelerate product development.",
+          "Use patent intelligence to inform R&D strategy and accelerate product development.",
       },
     ],
   },
@@ -40,12 +40,12 @@ const services = [
       {
         label: "Litigation Finance",
         detail:
-          "Strategic financing solutions for IP enforcement and defense.",
+          "Strategic financing solutions for patent enforcement and defense.",
       },
       {
-        label: "Business & IP Valuation",
+        label: "Business & Patent Valuation",
         detail:
-          "Rigorous valuation frameworks that quantify your IP portfolio's worth.",
+          "Rigorous valuation frameworks that quantify your patent portfolio's worth.",
       },
       {
         label: "Fundraising Strategy & Execution",
@@ -63,10 +63,10 @@ const services = [
       {
         label: "Litigation Finance",
         detail:
-          "Strategic financing solutions for IP enforcement and defense.",
+          "Strategic financing solutions for patent enforcement and defense.",
       },
       {
-        label: "Business & IP Valuation",
+        label: "Business & Patent Valuation",
         detail:
           "Rigorous valuation frameworks that communicate real value to stakeholders.",
       },
@@ -142,7 +142,7 @@ export default function ServicesPage() {
       <section className="bg-[#0c1425] py-24 sm:py-32">
         <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white sm:text-4xl">
-            Ready to turn your IP into a growth engine?
+            Ready to turn your patents into a growth engine?
           </h2>
           <div className="mt-10">
             <Link

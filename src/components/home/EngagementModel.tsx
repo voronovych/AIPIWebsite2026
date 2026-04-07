@@ -7,7 +7,7 @@ const engagement = [
   {
     step: "Structuring",
     description:
-      "Shape IP, valuation, finance, and commercialization strategy around measurable outcomes rather than isolated deliverables.",
+      "Shape patent, valuation, finance, and commercialization strategy around measurable outcomes rather than isolated deliverables.",
   },
   {
     step: "Execution",
@@ -37,11 +37,8 @@ export default function EngagementModel() {
           </p>
         </div>
 
-        {/* Three-phase cards with connecting line */}
+        {/* Three-phase cards */}
         <div className="relative">
-          {/* Connecting line behind cards */}
-          <div className="hidden lg:block absolute top-16 left-[16.67%] right-[16.67%] h-px bg-gradient-to-r from-transparent via-[#1d4ed8] to-transparent" />
-
           <div className="grid gap-8 lg:grid-cols-3">
             {engagement.map((item, index) => (
               <div

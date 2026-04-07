@@ -26,7 +26,7 @@ export default function Hero() {
               Defend.
             </h1>
             <p className="mt-8 text-lg leading-8 text-white/60 max-w-2xl">
-              AiPi helps technology companies build strategic IP positions,
+              AiPi helps technology companies build strategic patent positions,
               raise capital, and accelerate growth using proprietary tools
               and senior-level advisory.
             </p>

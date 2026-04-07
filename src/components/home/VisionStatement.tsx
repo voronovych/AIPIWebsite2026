@@ -11,7 +11,7 @@ const founders = [
     name: "Eric Morehouse",
     title: "Founder, Managing Director",
     quote:
-      "Our work sits at the intersection of product direction, IP positioning, finance, and commercialization. That overlap is the point, because that is where material business value is often won or lost.",
+      "Our work sits at the intersection of product direction, patent positioning, finance, and commercialization. That overlap is the point, because that is where material business value is often won or lost.",
   },
   {
     name: "Joe Eaton",

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with AiPi Solutions. Let's discuss how to turn your IP into a growth engine.",
+    "Get in touch with AiPi Solutions. Let's discuss how to turn your patents into a growth engine.",
 };
 
 export default function ContactPage() {
@@ -15,7 +15,7 @@ export default function ContactPage() {
             Please get in touch
           </h1>
           <p className="mt-6 text-lg leading-8 text-white/60">
-            Let&apos;s discuss how to turn your IP into a growth engine.
+            Let&apos;s discuss how to turn your patents into a growth engine.
           </p>
         </div>
       </section>

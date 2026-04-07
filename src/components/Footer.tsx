@@ -23,7 +23,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="mt-4 text-sm leading-6 text-white/40">
-              Strategic IP, finance, and business advisory for
+              Strategic patent, finance, and business advisory for
               technology companies.
             </p>
           </div>

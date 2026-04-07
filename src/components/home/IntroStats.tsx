@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
 const stats = [
-  { end: 250, prefix: "$", suffix: "M+", label: "In value created via IP and strategy" },
+  { end: 250, prefix: "$", suffix: "M+", label: "In value created via patents and strategy" },
   { end: 10000, prefix: "", suffix: "+", label: "Patents strategically assessed" },
   { end: 100, prefix: "", suffix: "+", label: "Patent portfolios generated" },
 ];
@@ -65,10 +65,10 @@ export default function IntroStats() {
         <div className="grid gap-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
           <div>
             <h2 className="text-3xl font-bold tracking-tight text-[#0c1425] sm:text-4xl leading-tight">
-              Where technology, IP, finance, and commercialization intersect.
+              Where technology, patents, finance, and commercialization intersect.
             </h2>
             <p className="mt-6 text-xl leading-9 text-[#4b5563]">
-              AiPi operates at the intersection of product direction, IP
+              AiPi operates at the intersection of product direction, patent
               positioning, finance, and commercialization. That overlap is the
               point, because it is where material business value is often won
               or lost. We bring multidisciplinary expertise that other

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     template: "%s | AiPi Solutions",
   },
   description:
-    "AiPi helps technology companies develop, protect, and monetize innovation through strategic patent services, AI-driven IP intelligence, fundraising and diligence support, and go-to-market facilitation.",
+    "AiPi helps technology companies develop, protect, and monetize innovation through strategic patent services, AI-driven patent intelligence, fundraising and diligence support, and go-to-market facilitation.",
   metadataBase: new URL("https://aipisolutions.com"),
   openGraph: {
     type: "website",

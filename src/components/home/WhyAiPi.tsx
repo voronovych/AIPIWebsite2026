@@ -2,9 +2,9 @@ import Link from "next/link";
 
 const reasons = [
   {
-    title: "Strategic IP and AI Intelligence",
+    title: "Strategic Patent and AI Intelligence",
     description:
-      "We combine 100+ years of multidisciplinary expertise with proprietary tools to identify growth whitespace, defend differentiators, and turn IP into measurable advantage.",
+      "We combine 100+ years of multidisciplinary expertise with proprietary tools to identify growth whitespace, defend differentiators, and turn patents into measurable advantage.",
   },
   {
     title: "Measurable Business Value",
