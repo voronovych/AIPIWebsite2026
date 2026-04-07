@@ -2,19 +2,16 @@ import Link from "next/link";
 
 const services = [
   {
-    num: "01",
     title: "Technology",
     description:
       "Use <em>Growth Landscaping</em> and <em>AI-driven analysis</em> to identify whitespace, sharpen product direction, and build strategic patent portfolios.",
   },
   {
-    num: "02",
     title: "Strategic Finance",
     description:
       "Deliver grounded <em>valuation frameworks</em>, <em>diligence readiness</em>, and <em>fundraising execution</em> to enhance investor confidence.",
   },
   {
-    num: "03",
     title: "Business Development",
     description:
       "Translate differentiation into <em>partnerships</em>, <em>revenue strategy</em>, <em>market positioning</em>, and executive decision-making.",
@@ -42,9 +39,6 @@ export default function ServicesPreview() {
               key={service.title}
               className="group bg-[#0c1425] p-12 sm:p-14 transition-all duration-300 hover:bg-[#111c32] cursor-pointer scale-100 hover:scale-[1.03] hover:z-10 group-hover/grid:scale-[0.98] group-hover/grid:hover:scale-[1.03]"
             >
-              <span className="text-base font-light text-white/20">
-                {service.num}
-              </span>
               <h3 className="mt-5 text-2xl font-bold text-white sm:text-3xl">
                 {service.title}
               </h3>

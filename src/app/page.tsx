@@ -2,9 +2,8 @@ import Hero from "@/components/home/Hero";
 import IntroStats from "@/components/home/IntroStats";
 import ServicesPreview from "@/components/home/ServicesPreview";
 import VisionStatement from "@/components/home/VisionStatement";
-import WhyAiPi from "@/components/home/WhyAiPi";
+import LogoCarousel from "@/components/home/LogoCarousel";
 import EngagementModel from "@/components/home/EngagementModel";
-import HomeCTA from "@/components/home/HomeCTA";
 
 export default function Home() {
   return (
@@ -13,9 +12,9 @@ export default function Home() {
       <IntroStats />
       <ServicesPreview />
       <VisionStatement />
-      <WhyAiPi />
+      <LogoCarousel />
+      <div className="h-4 bg-[#060b14]" />
       <EngagementModel />
-      <HomeCTA />
     </>
   );
 }

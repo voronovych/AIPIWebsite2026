@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
+import aipiLogo from "@/assets/AiPilogo-white.png";
 
 const navigation = [
   { name: "Services", href: "/services" },
@@ -13,6 +15,12 @@ export default function Header() {
       <nav className="mx-auto max-w-7xl px-6 lg:px-8" aria-label="Main navigation">
         <div className="flex h-20 items-center justify-between border-b border-white/10">
           <Link href="/" className="flex items-center gap-2">
+            <Image
+              src={aipiLogo}
+              alt="AiPi Solutions"
+              className="h-10 w-auto"
+              priority
+            />
             <span className="text-xl font-bold tracking-tight text-white">
               AiPi
             </span>

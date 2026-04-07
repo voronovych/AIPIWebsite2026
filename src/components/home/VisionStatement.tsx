@@ -4,17 +4,18 @@ import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ericHeadshot from "@/assets/Eric_Morehouse_BW_Headshot.png";
+import joeHeadshot from "@/assets/Joe_eaton.png";
 
 const founders = [
   {
     name: "Eric Morehouse",
-    title: "{Title}",
+    title: "Founder, Managing Director",
     quote:
       "Our work sits at the intersection of product direction, IP positioning, finance, and commercialization. That overlap is the point, because that is where material business value is often won or lost.",
   },
   {
     name: "Joe Eaton",
-    title: "{Title}",
+    title: "CTO, Managing Director",
     quote:
       "The companies that win are the ones that understand what they own, why it matters, and how to make it work harder than the competition ever expected.",
   },
@@ -56,6 +57,21 @@ export default function VisionStatement() {
         />
       </div>
 
+      {/* Joe's photo — full section height, anchored left (mirrored) */}
+      <div
+        className={`hidden lg:block absolute inset-y-0 left-0 transition-opacity duration-700 ${
+          active === 1 ? "opacity-100" : "opacity-0"
+        }`}
+        style={{ aspectRatio: "1 / 1", height: "100%" }}
+      >
+        <Image
+          src={joeHeadshot}
+          alt="Joe Eaton"
+          fill
+          className="object-cover object-top grayscale"
+        />
+      </div>
+
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
         <div className="relative min-h-[320px] sm:min-h-[280px]">
           {founders.map((founder, index) => (
@@ -69,7 +85,7 @@ export default function VisionStatement() {
               aria-hidden={index !== active}
             >
               <div className={`flex h-full flex-col justify-center ${
-                index === 0 ? "items-start text-left lg:max-w-[70%]" : "items-center text-center"
+                index === 0 ? "items-start text-left lg:max-w-[70%]" : "items-end text-right lg:max-w-[70%] lg:ml-auto"
               }`}>
                 <p className="text-2xl font-medium italic leading-10 text-[#0c1425] sm:text-3xl">
                   &ldquo;{founder.quote}&rdquo;

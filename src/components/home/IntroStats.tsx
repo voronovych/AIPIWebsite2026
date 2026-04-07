@@ -67,7 +67,7 @@ export default function IntroStats() {
             <h2 className="text-3xl font-bold tracking-tight text-[#0c1425] sm:text-4xl leading-tight">
               Where technology, IP, finance, and commercialization intersect.
             </h2>
-            <p className="mt-6 text-base leading-7 text-[#4b5563]">
+            <p className="mt-6 text-xl leading-9 text-[#4b5563]">
               AiPi operates at the intersection of product direction, IP
               positioning, finance, and commercialization. That overlap is the
               point, because it is where material business value is often won
