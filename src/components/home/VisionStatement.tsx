@@ -87,13 +87,15 @@ export default function VisionStatement() {
               <div className={`flex h-full flex-col justify-center ${
                 index === 0 ? "items-start text-left lg:max-w-[70%]" : "items-end text-right lg:max-w-[70%] lg:ml-auto"
               }`}>
-                <p className="text-2xl font-medium italic leading-10 text-[#0c1425] sm:text-3xl">
-                  &ldquo;{founder.quote}&rdquo;
-                </p>
-                <p className="mt-6 text-sm font-semibold text-[#0c1425]">
-                  {founder.name}
-                </p>
-                <p className="text-sm text-[#6b7280]">{founder.title}</p>
+                <div className="bg-white/90 backdrop-blur-sm p-6 sm:p-8 inline-block">
+                  <p className="text-2xl font-medium italic leading-10 text-[#0c1425] sm:text-3xl">
+                    &ldquo;{founder.quote}&rdquo;
+                  </p>
+                  <p className="mt-6 text-sm font-semibold text-[#0c1425]">
+                    {founder.name}
+                  </p>
+                  <p className="text-sm text-[#6b7280]">{founder.title}</p>
+                </div>
               </div>
             </div>
           ))}
