@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import StrategicServicesGraphic from "@/components/StrategicServicesGraphic";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -135,6 +136,19 @@ export default function ServicesPage() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Interactive overview graphic */}
+      <section className="bg-[#0c1425] py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <h2 className="text-5xl sm:text-7xl font-extrabold text-center mb-12 tracking-widest">
+            <span className="text-transparent [-webkit-text-stroke:2px_white]">Built on Patents</span>
+            <br />
+            <span className="text-white">Not Defined by Them</span>
+          </h2>
+          <div className="mx-auto mb-16 w-200 h-px bg-white/30" />
+          <StrategicServicesGraphic />
         </div>
       </section>
 
