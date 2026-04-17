@@ -9,18 +9,18 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <section className="bg-[#0c1425] pt-36 pb-24 sm:pt-44 sm:pb-28">
+      <section className="bg-[#0c1425] pt-28 pb-16 sm:pt-36 sm:pb-20">
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+          <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
             Please get in touch
           </h1>
-          <p className="mt-6 text-lg leading-8 text-white/60">
+          <p className="mt-6 text-base leading-7 text-white/60">
             Let&apos;s discuss how to turn your patents into a growth engine.
           </p>
         </div>
       </section>
 
-      <section className="bg-white py-24 sm:py-32">
+      <section className="bg-white py-16 sm:py-24">
         <div className="mx-auto max-w-2xl px-6 lg:px-8">
           <form className="space-y-6">
             <div>
@@ -92,7 +92,7 @@ export default function ContactPage() {
 
             <button
               type="submit"
-              className="w-full bg-[#1d4ed8] text-white py-3 text-sm font-semibold hover:bg-[#1e40af] transition-colors"
+              className="w-full bg-[#1d4ed8] text-white py-3 text-base font-semibold hover:bg-[#1e40af] transition-colors"
             >
               Send Message
             </button>

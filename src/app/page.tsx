@@ -13,7 +13,6 @@ export default function Home() {
       <ServicesPreview />
       <VisionStatement />
       <LogoCarousel />
-      <div className="h-4 bg-[#060b14]" />
       <EngagementModel />
     </>
   );

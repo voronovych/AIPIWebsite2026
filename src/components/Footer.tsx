@@ -10,7 +10,7 @@ const links = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#080e1c] mt-auto">
+    <footer className="bg-[#0c1425] mt-auto">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid gap-12 py-16 sm:grid-cols-3 border-b border-white/10">
           <div>
@@ -22,7 +22,7 @@ export default function Footer() {
                 Solutions
               </span>
             </div>
-            <p className="mt-4 text-sm leading-6 text-white/40">
+            <p className="mt-4 text-base leading-6 text-white/40">
               Strategic patent, finance, and business advisory for
               technology companies.
             </p>
@@ -33,7 +33,7 @@ export default function Footer() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-sm text-white/50 hover:text-white transition-colors"
+                  className="text-base text-white/50 hover:text-white transition-colors"
                 >
                   {link.name}
                 </Link>
@@ -41,7 +41,7 @@ export default function Footer() {
             </nav>
           </div>
           <div>
-            <p className="text-sm leading-6 text-white/50">
+            <p className="text-base leading-6 text-white/50">
               8230 Leesburg Pike, Suite 660
               <br />
               Vienna, VA 22182
@@ -49,12 +49,12 @@ export default function Footer() {
           </div>
         </div>
         <div className="flex flex-col items-center justify-between gap-4 py-8 sm:flex-row">
-          <p className="text-xs text-white/30">
+          <p className="text-sm text-white/30">
             &copy; 2026 AiPi Solutions. All rights reserved.
           </p>
           <Link
             href="/privacy-policy"
-            className="text-xs text-white/30 hover:text-white transition-colors"
+            className="text-sm text-white/30 hover:text-white transition-colors"
           >
             Privacy Policy
           </Link>

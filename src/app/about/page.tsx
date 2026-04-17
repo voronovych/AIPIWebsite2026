@@ -32,12 +32,12 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-[#0c1425] pt-36 pb-24 sm:pt-44 sm:pb-28">
+      <section className="bg-[#0c1425] pt-28 pb-16 sm:pt-36 sm:pb-20">
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl leading-tight">
+          <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl leading-tight">
             Unparalleled team
           </h1>
-          <p className="mt-6 text-lg leading-8 text-white/60">
+          <p className="mt-6 text-base leading-7 text-white/60">
             AiPi LLC is comprised of a group of professionals with diverse
             backgrounds that allow AiPi to provide a suite of strategic services
             that is beyond the capabilities of other business consultancies. We
@@ -49,7 +49,7 @@ export default function AboutPage() {
           <div className="mt-8">
             <Link
               href="/contact"
-              className="bg-[#1d4ed8] text-white px-7 py-3 text-sm font-semibold hover:bg-[#1e40af] transition-colors inline-block"
+              className="bg-[#1d4ed8] text-white px-7 py-3 text-base font-semibold hover:bg-[#1e40af] transition-colors inline-block"
             >
               Work With AiPi
             </Link>
@@ -58,13 +58,13 @@ export default function AboutPage() {
       </section>
 
       {/* Specializations */}
-      <section className="bg-white py-24 sm:py-32">
+      <section className="bg-white py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="max-w-3xl">
-            <h2 className="text-3xl font-bold tracking-tight text-[#0c1425] sm:text-4xl">
+            <h2 className="text-2xl font-bold tracking-tight text-[#0c1425] sm:text-3xl">
               Services that drive real growth
             </h2>
-            <p className="mt-6 text-base text-[#4b5563] leading-relaxed">
+            <p className="mt-4 text-base text-[#4b5563] leading-relaxed">
               AiPi provides the services most important to growing
               business, including services often ignored by other consultancies.
               We specialize in:
@@ -76,7 +76,7 @@ export default function AboutPage() {
                 key={item}
                 className="border-l-2 border-[#1d4ed8] pl-5 py-3"
               >
-                <p className="text-sm text-[#374151] leading-relaxed">
+                <p className="text-base text-[#374151] leading-relaxed">
                   {item}
                 </p>
               </div>
@@ -86,9 +86,9 @@ export default function AboutPage() {
       </section>
 
       {/* Why Traditional Patents Fall Short */}
-      <section className="bg-[#111c32] py-24 sm:py-32">
+      <section className="bg-[#111c32] py-16 sm:py-24">
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
             Why traditional patents fall short
           </h2>
           <p className="mt-6 text-base text-white/50 leading-relaxed">
@@ -103,10 +103,10 @@ export default function AboutPage() {
       </section>
 
       {/* Building Strategic Patent Portfolios */}
-      <section className="bg-white py-24 sm:py-32">
+      <section className="bg-white py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="max-w-3xl">
-            <h2 className="text-3xl font-bold tracking-tight text-[#0c1425] sm:text-4xl">
+            <h2 className="text-2xl font-bold tracking-tight text-[#0c1425] sm:text-3xl">
               Building strategic patent portfolios
             </h2>
             <p className="mt-6 text-base text-[#4b5563] leading-relaxed">
@@ -124,7 +124,7 @@ export default function AboutPage() {
                 key={goal}
                 className="border border-[#e5e7eb] px-5 py-4 text-center"
               >
-                <p className="text-sm font-medium text-[#0c1425]">{goal}</p>
+                <p className="text-base font-medium text-[#0c1425]">{goal}</p>
               </div>
             ))}
           </div>
@@ -132,7 +132,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-[#0c1425] py-24 sm:py-32">
+      <section className="bg-[#0c1425] py-16 sm:py-24">
         <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white sm:text-4xl">
             Have a question or want to explore how AiPi can support your
@@ -141,7 +141,7 @@ export default function AboutPage() {
           <div className="mt-10">
             <Link
               href="/contact"
-              className="bg-[#1d4ed8] text-white px-8 py-3 text-sm font-semibold hover:bg-[#1e40af] transition-colors inline-block"
+              className="bg-[#1d4ed8] text-white px-8 py-3 text-base font-semibold hover:bg-[#1e40af] transition-colors inline-block"
             >
               Start the Conversation
             </Link>

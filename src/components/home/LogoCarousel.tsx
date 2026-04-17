@@ -16,21 +16,21 @@ import CaliberLogo from "@/assets/CompanyLogos/CaliberLogo.svg";
 import AccumontLogo from "@/assets/CompanyLogos/AccumontLogo.svg";
 
 const row1 = [
-  { src: SymmatricsLogo, alt: "Symmatrics", className: "h-10 w-56" },
-  { src: VectigoLogo, alt: "Vectigo", className: "h-16 w-48" },
-  { src: VerdelisLogo, alt: "Verdelis", className: "h-16 w-40" },
-  { src: NewSapienceLogo, alt: "New Sapience", className: "h-12 w-56" },
-  { src: ETCapitalLogo, alt: "ET Capital", className: "h-14 w-48" },
-  { src: APSLogo, alt: "APS", className: "h-16 w-44" },
+  { src: SymmatricsLogo, alt: "Symmatrics" },
+  { src: VectigoLogo, alt: "Vectigo" },
+  { src: VerdelisLogo, alt: "Verdelis" },
+  { src: NewSapienceLogo, alt: "New Sapience" },
+  { src: ETCapitalLogo, alt: "ET Capital" },
+  { src: APSLogo, alt: "APS" },
 ];
 
 const row2 = [
-  { src: GroNaturalLogo, alt: "GroNatural", className: "h-16 w-48" },
-  { src: PreVueLogo, alt: "PreVue", className: "h-14 w-44" },
-  { src: NaturalVenturesLogo, alt: "Natural Ventures", className: "h-16 w-44" },
-  { src: GenfoquestLogo, alt: "Genfoquest", className: "h-10 w-56" },
-  { src: CaliberLogo, alt: "Caliber", className: "h-14 w-52" },
-  { src: AccumontLogo, alt: "Accumont", className: "h-12 w-52" },
+  { src: GroNaturalLogo, alt: "GroNatural" },
+  { src: PreVueLogo, alt: "PreVue" },
+  { src: NaturalVenturesLogo, alt: "Natural Ventures" },
+  { src: GenfoquestLogo, alt: "Genfoquest" },
+  { src: CaliberLogo, alt: "Caliber" },
+  { src: AccumontLogo, alt: "Accumont" },
 ];
 
 const rows = [
@@ -40,13 +40,13 @@ const rows = [
 
 export default function LogoCarousel() {
   return (
-    <section className="relative bg-[#0c1425] py-20 sm:py-28 overflow-hidden">
+    <section className="relative bg-[#0c1425] py-14 sm:py-20 overflow-hidden">
       {/* Accent stripe */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#1d4ed8] via-[#3b82f6] to-[#1d4ed8]" />
 
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 mb-20 text-center">
-        <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-          Trusted By <span className="text-transparent" style={{ WebkitTextStroke: "1.5px white" }}>Industry Leaders</span>
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 mb-12 text-center">
+        <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+          Trusted By <span className="text-white/40 font-bold">Industry Leaders</span>
         </h2>
       </div>
 
@@ -59,13 +59,13 @@ export default function LogoCarousel() {
         return (
           <div
             key={rowIndex}
-            className={`flex items-center gap-20 ${row.animation} ${rowIndex > 0 ? "mt-16" : ""}`}
+            className={`flex items-center gap-16 ${row.animation} ${rowIndex > 0 ? "mt-12" : ""}`}
             style={{ width: "max-content" }}
           >
             {tripled.map((logo, i) => (
               <div
                 key={`${logo.alt}-${rowIndex}-${i}`}
-                className={`flex-shrink-0 relative opacity-60 hover:opacity-90 transition-all duration-300 ${logo.className}`}
+                className="flex-shrink-0 h-10 w-40 relative opacity-60 hover:opacity-90 transition-all duration-300"
               >
                 <Image
                   src={logo.src}

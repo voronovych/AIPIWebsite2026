@@ -88,7 +88,7 @@ export default function StrategicServicesGraphic({
               ${active === p.id ? "bg-[#1d4ed8]" : "bg-transparent hover:bg-white/20"}
             `}
           >
-            <span className="-rotate-90 whitespace-nowrap text-lg font-semibold text-white tracking-wide select-none">
+            <span className="-rotate-90 whitespace-nowrap text-base font-semibold text-white tracking-wide select-none">
               {p.label}
             </span>
           </button>

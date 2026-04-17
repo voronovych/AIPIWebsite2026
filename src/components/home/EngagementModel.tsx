@@ -18,20 +18,17 @@ const engagement = [
 
 export default function EngagementModel() {
   return (
-    <section className="bg-[#060b14] py-32 sm:py-40">
+    <section className="bg-white py-12 sm:py-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Centered heading */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <h2 className="text-3xl font-bold tracking-tight text-[#0c1425] sm:text-4xl">
             Senior-Level Work,{" "}
-            <span
-              className="text-transparent"
-              style={{ WebkitTextStroke: "1.5px white" }}
-            >
+            <span className="text-[#6b7280] italic">
               Structured for Clarity
             </span>
           </h2>
-          <p className="mt-6 text-lg leading-8 text-white/50">
+          <p className="mt-6 text-lg leading-8 text-[#4b5563]">
             We begin with strategic context, structure around the business
             objective, and support the work through execution.
           </p>
@@ -43,20 +40,20 @@ export default function EngagementModel() {
             {engagement.map((item, index) => (
               <div
                 key={item.step}
-                className="relative group border border-white/10 bg-[#111c32]/50 p-10 sm:p-12 transition-colors duration-300 hover:border-white/20"
+                className="relative group border border-[#e5e7eb] bg-[#f8fafc] p-10 sm:p-12 transition-colors duration-300 hover:border-[#1d4ed8]/30 hover:bg-white"
               >
                 {/* Step indicator */}
                 <div className="flex items-center gap-4 mb-6">
-                  <span className="flex items-center justify-center w-10 h-10 rounded-full border border-[#1d4ed8]/50 text-sm font-bold text-[#3b82f6]">
+                  <span className="flex items-center justify-center w-10 h-10 rounded-full border border-[#1d4ed8]/30 text-sm font-bold text-[#1d4ed8]">
                     {index + 1}
                   </span>
-                  <div className="h-px flex-1 bg-white/10" />
+                  <div className="h-px flex-1 bg-[#e5e7eb]" />
                 </div>
 
-                <h3 className="text-2xl font-bold text-white sm:text-3xl">
+                <h3 className="text-xl font-bold text-[#0c1425] sm:text-2xl">
                   {item.step}
                 </h3>
-                <p className="mt-4 text-base leading-8 text-white/50">
+                <p className="mt-4 text-base leading-8 text-[#4b5563]">
                   {item.description}
                 </p>
               </div>

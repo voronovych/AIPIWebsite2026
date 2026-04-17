@@ -84,12 +84,12 @@ export default function ServicesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-[#0c1425] pt-36 pb-24 sm:pt-44 sm:pb-28">
+      <section className="bg-[#0c1425] pt-28 pb-16 sm:pt-36 sm:pb-20">
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl leading-tight">
+          <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl leading-tight">
             Strategic services that drive real growth
           </h1>
-          <p className="mt-6 text-lg leading-8 text-white/60">
+          <p className="mt-6 text-base leading-7 text-white/60">
             AiPi provides the services most important to growing
             business, including services often ignored by other consultancies.
           </p>
@@ -97,7 +97,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Service cards */}
-      <section className="bg-white py-24 sm:py-32">
+      <section className="bg-white py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 space-y-20">
           {services.map((service, i) => (
             <div
@@ -110,7 +110,7 @@ export default function ServicesPage() {
                 </span>
                 <div className="h-px flex-1 bg-transparent" />
               </div>
-              <h2 className="text-2xl font-bold text-[#0c1425] sm:text-3xl">
+              <h2 className="text-xl font-bold text-[#0c1425] sm:text-2xl">
                 {service.title}
               </h2>
               <p className="mt-1 text-sm font-medium text-[#1d4ed8]">
@@ -140,9 +140,9 @@ export default function ServicesPage() {
       </section>
 
       {/* Interactive overview graphic */}
-      <section className="bg-[#0c1425] py-24 sm:py-32">
+      <section className="bg-[#0c1425] py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 className="text-5xl sm:text-7xl font-extrabold text-center mb-12 tracking-widest">
+          <h2 className="text-4xl sm:text-5xl font-extrabold text-center mb-12 tracking-widest">
             <span className="text-transparent [-webkit-text-stroke:2px_white]">Built on Patents</span>
             <br />
             <span className="text-white">Not Defined by Them</span>
@@ -153,15 +153,15 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-[#0c1425] py-24 sm:py-32">
+      <section className="bg-[#0c1425] py-16 sm:py-24">
         <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-white sm:text-4xl">
+          <h2 className="text-2xl font-bold text-white sm:text-3xl">
             Ready to turn your patents into a growth engine?
           </h2>
           <div className="mt-10">
             <Link
               href="/contact"
-              className="bg-[#1d4ed8] text-white px-8 py-3 text-sm font-semibold hover:bg-[#1e40af] transition-colors inline-block"
+              className="bg-[#1d4ed8] text-white px-8 py-3 text-base font-semibold hover:bg-[#1e40af] transition-colors inline-block"
             >
               Speak with an Advisor
             </Link>

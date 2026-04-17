@@ -20,30 +20,30 @@ const services = [
 
 export default function ServicesPreview() {
   return (
-    <section className="bg-[#0c1425] py-32 sm:py-40">
+    <section className="bg-[#f8fafc] py-12 sm:py-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl max-w-xl">
+          <h2 className="text-3xl font-bold tracking-tight text-[#0c1425] sm:text-4xl max-w-xl">
             Strategic Services
           </h2>
           <Link
             href="/services"
-            className="text-base font-semibold text-white/40 hover:text-white transition-colors"
+            className="text-base font-semibold text-[#6b7280] hover:text-[#0c1425] transition-colors"
           >
             Explore All Services &rarr;
           </Link>
         </div>
-        <div className="mt-16 grid gap-px overflow-visible border border-white/10 bg-white/10 sm:grid-cols-3 group/grid">
+        <div className="mt-10 grid gap-px overflow-visible border border-[#e5e7eb] bg-[#e5e7eb] sm:grid-cols-3 group/grid">
           {services.map((service) => (
             <div
               key={service.title}
-              className="group bg-[#0c1425] p-12 sm:p-14 transition-all duration-300 hover:bg-[#111c32] cursor-pointer scale-100 hover:scale-[1.03] hover:z-10 group-hover/grid:scale-[0.98] group-hover/grid:hover:scale-[1.03]"
+              className="group bg-white p-8 sm:p-10 transition-all duration-300 hover:bg-[#f1f5f9] cursor-pointer scale-100 hover:scale-[1.03] hover:z-10 group-hover/grid:scale-[0.98] group-hover/grid:hover:scale-[1.03]"
             >
-              <h3 className="mt-5 text-2xl font-bold text-white sm:text-3xl">
+              <h3 className="mt-5 text-xl font-bold text-[#0c1425] sm:text-2xl">
                 {service.title}
               </h3>
               <p
-                className="mt-5 text-base leading-8 text-white/70 [&>em]:not-italic [&>em]:text-white/70 [&>em]:transition-all [&>em]:duration-300 group-hover:[&>em]:font-semibold group-hover:[&>em]:text-white"
+                className="mt-5 text-base leading-8 text-[#4b5563] [&>em]:not-italic [&>em]:text-[#4b5563] [&>em]:transition-all [&>em]:duration-300 group-hover:[&>em]:font-semibold group-hover:[&>em]:text-[#0c1425]"
                 dangerouslySetInnerHTML={{ __html: service.description }}
               />
             </div>

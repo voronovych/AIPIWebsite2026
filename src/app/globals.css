@@ -15,7 +15,6 @@ html {
 body {
   background: #0c1425;
   color: #f8fafc;
-  zoom: 0.67;
 }
 
 @keyframes scroll {
@@ -37,9 +36,47 @@ body {
 }
 
 .animate-scroll {
-  animation: scroll 25s linear infinite;
+  animation: scroll 45s linear infinite;
 }
 
 .animate-scroll-reverse {
-  animation: scroll-reverse 25s linear infinite;
+  animation: scroll-reverse 45s linear infinite;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient-shift {
+  animation: gradient-shift 12s ease infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s ease-in-out infinite;
+}
+
+.animate-pulse-slow-delayed {
+  animation: pulse-slow 8s ease-in-out 4s infinite;
+}
+
+.wheel-segment {
+  transform-origin: 250px 250px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  cursor: pointer;
+}
+
+.wheel-segment text {
+  pointer-events: none;
+}
+
+.wheel-segment:hover {
+  transform: scale(1.08);
+  filter: brightness(1.6);
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
 }

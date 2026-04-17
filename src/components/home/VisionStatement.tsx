@@ -38,7 +38,7 @@ export default function VisionStatement() {
 
   return (
     <section
-      className="relative bg-white py-24 sm:py-32 overflow-hidden"
+      className="relative bg-white py-10 sm:py-14 overflow-hidden"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -73,7 +73,7 @@ export default function VisionStatement() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="relative min-h-[320px] sm:min-h-[280px]">
+        <div className="relative min-h-[220px] sm:min-h-[200px]">
           {founders.map((founder, index) => (
             <div
               key={founder.name}
@@ -87,14 +87,14 @@ export default function VisionStatement() {
               <div className={`flex h-full flex-col justify-center ${
                 index === 0 ? "items-start text-left lg:max-w-[70%]" : "items-end text-right lg:max-w-[70%] lg:ml-auto"
               }`}>
-                <div className="bg-white/90 backdrop-blur-sm p-6 sm:p-8 inline-block">
-                  <p className="text-2xl font-medium italic leading-10 text-[#0c1425] sm:text-3xl">
+                <div className="bg-white/90 backdrop-blur-sm p-4 sm:p-6 inline-block">
+                  <p className="text-lg font-medium italic leading-7 text-[#0c1425] sm:text-xl sm:leading-8">
                     &ldquo;{founder.quote}&rdquo;
                   </p>
-                  <p className="mt-6 text-sm font-semibold text-[#0c1425]">
+                  <p className="mt-6 text-base font-semibold text-[#0c1425]">
                     {founder.name}
                   </p>
-                  <p className="text-sm text-[#6b7280]">{founder.title}</p>
+                  <p className="text-base text-[#6b7280]">{founder.title}</p>
                 </div>
               </div>
             </div>
@@ -102,7 +102,7 @@ export default function VisionStatement() {
         </div>
 
         {/* Dots + link */}
-        <div className="mt-10 flex flex-col items-center gap-4">
+        <div className="mt-6 flex flex-col items-center gap-3">
           <div className="flex gap-2">
             {founders.map((_, i) => (
               <button
@@ -119,7 +119,7 @@ export default function VisionStatement() {
           </div>
           <Link
             href="/about"
-            className="text-sm font-semibold text-[#6b7280] hover:text-[#0c1425] transition-colors"
+            className="text-base font-semibold text-[#6b7280] hover:text-[#0c1425] transition-colors"
           >
             See the Difference We Make &rarr;
           </Link>
