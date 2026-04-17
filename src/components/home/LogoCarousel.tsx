@@ -2,42 +2,40 @@
 
 import Image from "next/image";
 
-// Add your logo imports here, e.g.:
-// import logo1 from "@/assets/logos/company1.png";
-// import logo2 from "@/assets/logos/company2.png";
+import SymmatricsLogo from "@/assets/CompanyLogos/Symmatrics_Logo.svg";
+import VectigoLogo from "@/assets/CompanyLogos/VectigoLogo.svg";
+import VerdelisLogo from "@/assets/CompanyLogos/VerdelisLogo.svg";
+import NewSapienceLogo from "@/assets/CompanyLogos/NewSapienceLogo.svg";
+import ETCapitalLogo from "@/assets/CompanyLogos/ETCapitalLogo.svg";
+import APSLogo from "@/assets/CompanyLogos/APSLogo.svg";
+import GroNaturalLogo from "@/assets/CompanyLogos/GroNaturalLogo.svg";
+import PreVueLogo from "@/assets/CompanyLogos/PreVueLogo.svg";
+import NaturalVenturesLogo from "@/assets/CompanyLogos/NaturalVenturesLogo.svg";
+import GenfoquestLogo from "@/assets/CompanyLogos/GenfoquestLogo.svg";
+import CaliberLogo from "@/assets/CompanyLogos/CaliberLogo.svg";
+import AccumontLogo from "@/assets/CompanyLogos/AccumontLogo.svg";
 
-// Replace these placeholders with real logos — 6 per row
-const row1: { src: string; alt: string }[] = [
-  { src: "/logos/placeholder-1.png", alt: "Company 1" },
-  { src: "/logos/placeholder-2.png", alt: "Company 2" },
-  { src: "/logos/placeholder-3.png", alt: "Company 3" },
-  { src: "/logos/placeholder-4.png", alt: "Company 4" },
-  { src: "/logos/placeholder-5.png", alt: "Company 5" },
-  { src: "/logos/placeholder-6.png", alt: "Company 6" },
+const row1 = [
+  { src: SymmatricsLogo, alt: "Symmatrics", className: "h-10 w-56" },
+  { src: VectigoLogo, alt: "Vectigo", className: "h-16 w-48" },
+  { src: VerdelisLogo, alt: "Verdelis", className: "h-16 w-40" },
+  { src: NewSapienceLogo, alt: "New Sapience", className: "h-12 w-56" },
+  { src: ETCapitalLogo, alt: "ET Capital", className: "h-14 w-48" },
+  { src: APSLogo, alt: "APS", className: "h-16 w-44" },
 ];
 
-const row2: { src: string; alt: string }[] = [
-  { src: "/logos/placeholder-1.png", alt: "Company 7" },
-  { src: "/logos/placeholder-2.png", alt: "Company 8" },
-  { src: "/logos/placeholder-3.png", alt: "Company 9" },
-  { src: "/logos/placeholder-4.png", alt: "Company 10" },
-  { src: "/logos/placeholder-5.png", alt: "Company 11" },
-  { src: "/logos/placeholder-6.png", alt: "Company 12" },
-];
-
-const row3: { src: string; alt: string }[] = [
-  { src: "/logos/placeholder-1.png", alt: "Company 13" },
-  { src: "/logos/placeholder-2.png", alt: "Company 14" },
-  { src: "/logos/placeholder-3.png", alt: "Company 15" },
-  { src: "/logos/placeholder-4.png", alt: "Company 16" },
-  { src: "/logos/placeholder-5.png", alt: "Company 17" },
-  { src: "/logos/placeholder-6.png", alt: "Company 18" },
+const row2 = [
+  { src: GroNaturalLogo, alt: "GroNatural", className: "h-16 w-48" },
+  { src: PreVueLogo, alt: "PreVue", className: "h-14 w-44" },
+  { src: NaturalVenturesLogo, alt: "Natural Ventures", className: "h-16 w-44" },
+  { src: GenfoquestLogo, alt: "Genfoquest", className: "h-10 w-56" },
+  { src: CaliberLogo, alt: "Caliber", className: "h-14 w-52" },
+  { src: AccumontLogo, alt: "Accumont", className: "h-12 w-52" },
 ];
 
 const rows = [
   { logos: row1, animation: "animate-scroll" },
   { logos: row2, animation: "animate-scroll-reverse" },
-  { logos: row3, animation: "animate-scroll" },
 ];
 
 export default function LogoCarousel() {
@@ -46,7 +44,7 @@ export default function LogoCarousel() {
       {/* Accent stripe */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#1d4ed8] via-[#3b82f6] to-[#1d4ed8]" />
 
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 mb-14 text-center">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 mb-20 text-center">
         <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
           Trusted By <span className="text-transparent" style={{ WebkitTextStroke: "1.5px white" }}>Industry Leaders</span>
         </h2>
@@ -61,13 +59,13 @@ export default function LogoCarousel() {
         return (
           <div
             key={rowIndex}
-            className={`flex items-center gap-20 ${row.animation} ${rowIndex > 0 ? "mt-10" : ""}`}
+            className={`flex items-center gap-20 ${row.animation} ${rowIndex > 0 ? "mt-16" : ""}`}
             style={{ width: "max-content" }}
           >
             {tripled.map((logo, i) => (
               <div
                 key={`${logo.alt}-${rowIndex}-${i}`}
-                className="flex-shrink-0 h-12 w-36 relative opacity-30 hover:opacity-90 transition-all duration-300"
+                className={`flex-shrink-0 relative opacity-60 hover:opacity-90 transition-all duration-300 ${logo.className}`}
               >
                 <Image
                   src={logo.src}
