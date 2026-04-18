@@ -69,6 +69,7 @@ const executiveTeam = [
     title: "Founder, Managing Director",
     bio: "Veteran IP attorney and entrepreneur with over 30 years' experience advising clients including the DoD on commercialising cutting-edge IP.",
     image: ericHeadshot,
+    href: "/about/team/eric-morehouse",
   },
   {
     name: "Joe Eaton",
@@ -76,6 +77,7 @@ const executiveTeam = [
     bio: "One of America's leading AI scientists and managers with 13 years' service at NVIDIA, culminating as Distinguished System Engineer for Data & Graph Analytics.",
     image: joeHeadshot,
     flip: true,
+    href: "/about/team/joe-eaton",
   },
   {
     name: "Mete Ozmen",
@@ -83,6 +85,7 @@ const executiveTeam = [
     subtitle: "Head of Litigation Financing & Services",
     bio: "International business development and corporate finance executive with over 20 years' experience of innovative product go-to-market in EMEA and the USA.",
     image: meteHeadshot,
+    href: "/about/team/mete-ozmen",
   },
 ];
 
@@ -171,7 +174,7 @@ export default function AboutContent() {
 
             {/* Founded stat */}
             <div className="hidden lg:flex flex-col items-end">
-              <span className="text-8xl font-bold tracking-tight text-white/5">
+              <span className="text-8xl font-bold tracking-tight text-white/10">
                 2015
               </span>
               <div className="mt-2 text-right">
@@ -443,13 +446,13 @@ function TeamMemberCard({
   visible,
   delay,
 }: {
-  member: { name: string; title: string; subtitle?: string; bio: string; image: typeof ericHeadshot; flip?: boolean };
+  member: { name: string; title: string; subtitle?: string; bio: string; image: typeof ericHeadshot; flip?: boolean; href?: string };
   visible: boolean;
   delay: number;
 }) {
-  return (
+  const content = (
     <div
-      className={`group transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+      className={`group transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"} ${member.href ? "cursor-pointer" : ""}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       <div className="relative overflow-hidden bg-[#f8fafc] aspect-[4/5] mb-5">
@@ -460,7 +463,7 @@ function TeamMemberCard({
           className={`object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-500 ${member.flip ? "-scale-x-100" : ""}`}
         />
       </div>
-      <h3 className="text-lg font-bold text-[#0c1425]">{member.name}</h3>
+      <h3 className="text-lg font-bold text-[#0c1425] group-hover:text-[#1d4ed8] transition-colors">{member.name}</h3>
       <p className="text-sm font-medium text-[#1d4ed8] mt-0.5">
         {member.title}
       </p>
@@ -472,6 +475,11 @@ function TeamMemberCard({
       </p>
     </div>
   );
+
+  if (member.href) {
+    return <Link href={member.href}>{content}</Link>;
+  }
+  return content;
 }
 
 function TeamSection() {

@@ -41,10 +41,21 @@ const rows = [
 export default function LogoCarousel() {
   return (
     <section className="relative bg-[#0c1425] py-20 sm:py-28 overflow-hidden">
+      {/* Animated gradient background */}
+      <div
+        className="absolute inset-0 animate-gradient-shift"
+        style={{
+          background:
+            "linear-gradient(135deg, #0c1425 0%, #1a2a47 20%, #0c1425 40%, #162036 60%, #1e3a5f 80%, #0c1425 100%)",
+          backgroundSize: "400% 400%",
+        }}
+      />
+      <div className="absolute -top-20 -right-20 w-[700px] h-[700px] rounded-full bg-[#1d4ed8]/20 blur-[140px] animate-pulse-slow" />
+      <div className="absolute -bottom-20 -left-20 w-[500px] h-[500px] rounded-full bg-[#3b82f6]/15 blur-[120px] animate-pulse-slow-delayed" />
       {/* Accent stripe */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#1d4ed8] via-[#3b82f6] to-[#1d4ed8]" />
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#1d4ed8] via-[#3b82f6] to-[#1d4ed8] z-10" />
 
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 mb-16 text-center">
+      <div className="relative z-[2] mx-auto max-w-7xl px-6 lg:px-8 mb-16 text-center">
         <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
           Trusted By <span className="text-white/40 font-bold">Industry Leaders</span>
         </h2>
@@ -59,7 +70,7 @@ export default function LogoCarousel() {
         return (
           <div
             key={rowIndex}
-            className={`flex items-center gap-20 ${row.animation} ${rowIndex > 0 ? "mt-14" : ""}`}
+            className={`relative z-[2] flex items-center gap-20 ${row.animation} ${rowIndex > 0 ? "mt-14" : ""}`}
             style={{ width: "max-content" }}
           >
             {tripled.map((logo, i) => (

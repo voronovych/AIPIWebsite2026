@@ -40,7 +40,7 @@ export default function Hero() {
                 href="/contact"
                 className="bg-[#1d4ed8] text-white px-7 py-3 text-base font-semibold hover:bg-[#1e40af] transition-colors"
               >
-                Speak with an Advisor
+                Get in Touch
               </Link>
               <Link
                 href="/about"

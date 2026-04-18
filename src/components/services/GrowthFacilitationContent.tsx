@@ -98,13 +98,6 @@ export default function GrowthFacilitationContent() {
         />
         <div className="absolute -top-20 -right-20 w-[700px] h-[700px] rounded-full bg-[#1d4ed8]/20 blur-[140px] animate-pulse-slow" />
         <div className="absolute -bottom-20 -left-20 w-[500px] h-[500px] rounded-full bg-[#3b82f6]/15 blur-[120px] animate-pulse-slow-delayed" />
-        <div
-          className="absolute inset-0 z-[1]"
-          style={{
-            background:
-              "linear-gradient(to right, #0c1425 0%, #0c1425 30%, transparent 70%)",
-          }}
-        />
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
           <div className="max-w-3xl">
@@ -130,7 +123,7 @@ export default function GrowthFacilitationContent() {
                 href="/contact"
                 className="bg-[#1d4ed8] text-white px-6 py-2.5 text-base font-semibold hover:bg-[#1e40af] transition-colors"
               >
-                Speak with an Advisor
+                Get in Touch
               </Link>
               <Link
                 href="#lifecycle"

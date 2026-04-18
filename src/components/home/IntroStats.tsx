@@ -83,11 +83,12 @@ export default function IntroStats() {
             Where technology, patents, finance, and commercialization intersect.
           </h2>
           <p className="mt-4 text-base leading-7 text-[#4b5563]">
-            AiPi operates at the intersection of product direction, patent
-            positioning, finance, and commercialization. That overlap is the
-            point — it is where material business value is often won
-            or lost. We bring multidisciplinary expertise that other
-            consultancies simply do not offer.
+            Patent holders rarely lack valuable IP — they lack the landscape
+            visibility to position it, the commercial analysis to monetize it,
+            and the strategic capital to enforce it. AiPi closes all three gaps
+            under one roof, combining patent law, AI-driven intelligence
+            platforms, and investor networks that other consultancies simply
+            cannot offer.
           </p>
           <Link
             href="/about"

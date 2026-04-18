@@ -11,13 +11,13 @@ const founders = [
     name: "Eric Morehouse",
     title: "Founder, Managing Director",
     quote:
-      "Our work sits at the intersection of product direction, patent positioning, finance, and commercialization. That overlap is the point, because that is where material business value is often won or lost.",
+      "Our work sits at the intersection of product direction, patent positioning, finance, and commercialization. This is where material business value is often won or lost.",
   },
   {
     name: "Joe Eaton",
     title: "CTO, Managing Director",
     quote:
-      "The companies that win are the ones that understand what they own, why it matters, and how to make it work harder than the competition ever expected.",
+      "I'm excited to bring the power of GNNs to IP analysis and valuation. Knowledge Graphs are the future of AI, and combining this with strong litigation experience make AiPi uniquely effective in this industry.",
   },
 ];
 
