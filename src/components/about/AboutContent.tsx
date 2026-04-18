@@ -60,7 +60,7 @@ const countries = [
   "Austria",
   "Finland",
   "Bulgaria",
-  "Ukraine",
+  "Turkey",
 ];
 
 const executiveTeam = [
@@ -118,7 +118,7 @@ const markers: { name: string; coordinates: [number, number]; office?: boolean }
   { name: "Austria", coordinates: [14.55, 47.52] },
   { name: "Finland", coordinates: [25.75, 61.92] },
   { name: "Bulgaria", coordinates: [25.49, 42.7] },
-  { name: "Ukraine", coordinates: [30.52, 48.38] },
+  { name: "Turkey", coordinates: [32.86, 39.93] },
 ];
 
 /* ───────────────────── component ───────────────────── */
@@ -332,16 +332,17 @@ function MapSection() {
                       strokeWidth={isOffice ? 2 : 1}
                       style={{ cursor: "pointer", transition: "all 0.3s" }}
                     />
-                    {/* Label */}
+                    {/* Label — always visible for offices, hover-only for active markets */}
                     <text
                       textAnchor="middle"
                       y={isOffice ? 22 : 18}
                       style={{
-                        fill: isHovered || isOffice ? "white" : "rgba(255,255,255,0.5)",
+                        fill: "white",
                         fontSize: isOffice ? "10px" : "9px",
                         fontWeight: isOffice ? 600 : 400,
                         pointerEvents: "none",
-                        transition: "fill 0.3s",
+                        opacity: isOffice || isHovered ? 1 : 0,
+                        transition: "opacity 0.15s",
                       }}
                     >
                       {marker.name}

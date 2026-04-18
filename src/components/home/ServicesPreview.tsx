@@ -2,19 +2,28 @@ import Link from "next/link";
 
 const services = [
   {
+    title: "Strategic Patent Services",
+    href: "/services/strategic",
+    description:
+      "Full-lifecycle <em>patent landscaping</em>, <em>commercialisation analysis</em>, and <em>portfolio creation</em> powered by proprietary AI.",
+  },
+  {
     title: "Technology",
+    href: "/services/technology",
     description:
-      "Use <em>Growth Landscaping</em> and <em>AI-driven analysis</em> to identify whitespace, sharpen product direction, and build strategic patent portfolios.",
+      "Proprietary platforms for <em>patent intelligence</em>, <em>knowledge graphs</em>, and <em>agricultural data analysis</em>.",
   },
   {
-    title: "Strategic Finance",
+    title: "Growth Facilitation",
+    href: "/services/growth-facilitation",
     description:
-      "Deliver grounded <em>valuation frameworks</em>, <em>diligence readiness</em>, and <em>fundraising execution</em> to enhance investor confidence.",
+      "End-to-end support for <em>US market entry</em>, <em>operations scaling</em>, <em>fundraising</em>, and exit planning.",
   },
   {
-    title: "Business Development",
+    title: "Litigation Finance",
+    href: "/services/litigation-finance",
     description:
-      "Translate differentiation into <em>partnerships</em>, <em>revenue strategy</em>, <em>market positioning</em>, and executive decision-making.",
+      "Non-recourse <em>financing</em> for patent enforcement, covering <em>100% of legal fees</em> while you retain full control.",
   },
 ];
 
@@ -33,20 +42,21 @@ export default function ServicesPreview() {
             Explore All Services &rarr;
           </Link>
         </div>
-        <div className="mt-10 grid gap-px overflow-visible border border-[#e5e7eb] bg-[#e5e7eb] sm:grid-cols-3 group/grid">
+        <div className="mt-10 grid gap-px overflow-visible border border-[#e5e7eb] bg-[#e5e7eb] sm:grid-cols-2 lg:grid-cols-4 group/grid">
           {services.map((service) => (
-            <div
+            <Link
               key={service.title}
+              href={service.href}
               className="group bg-white p-8 sm:p-10 transition-all duration-300 hover:bg-[#f1f5f9] cursor-pointer scale-100 hover:scale-[1.03] hover:z-10 group-hover/grid:scale-[0.98] group-hover/grid:hover:scale-[1.03]"
             >
-              <h3 className="mt-5 text-xl font-bold text-[#0c1425] sm:text-2xl">
+              <h3 className="text-lg font-bold text-[#0c1425] sm:text-xl">
                 {service.title}
               </h3>
               <p
-                className="mt-5 text-base leading-8 text-[#4b5563] [&>em]:not-italic [&>em]:text-[#4b5563] [&>em]:transition-all [&>em]:duration-300 group-hover:[&>em]:font-semibold group-hover:[&>em]:text-[#0c1425]"
+                className="mt-4 text-sm leading-7 text-[#4b5563] [&>em]:not-italic [&>em]:text-[#4b5563] [&>em]:transition-all [&>em]:duration-300 group-hover:[&>em]:font-semibold group-hover:[&>em]:text-[#0c1425]"
                 dangerouslySetInnerHTML={{ __html: service.description }}
               />
-            </div>
+            </Link>
           ))}
         </div>
       </div>

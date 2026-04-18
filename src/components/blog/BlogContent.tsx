@@ -166,6 +166,7 @@ const posts: Post[] = [
 
 export default function BlogContent() {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [expandedFeatured, setExpandedFeatured] = useState<string | null>(null);
   const [expandedPost, setExpandedPost] = useState<string | null>(null);
 
   const filtered =
@@ -220,13 +221,13 @@ export default function BlogContent() {
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               {featuredPosts.map((post) => {
-                const isExpanded = expandedPost === post.title;
+                const isExpanded = expandedFeatured === post.title;
                 return (
                   <article
                     key={post.title}
                     className="group border border-[#e5e7eb] p-8 hover:border-[#1d4ed8]/30 hover:bg-[#f8fafc] transition-all duration-300 cursor-pointer"
                     onClick={() =>
-                      setExpandedPost(isExpanded ? null : post.title)
+                      setExpandedFeatured(isExpanded ? null : post.title)
                     }
                   >
                     <div className="flex items-center gap-3 mb-4">

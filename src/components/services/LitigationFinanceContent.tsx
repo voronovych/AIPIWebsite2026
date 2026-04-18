@@ -314,7 +314,6 @@ function HowItWorks() {
               key={item.step}
               className={`relative border border-white/10 bg-white/[0.03] p-8 hover:border-white/20 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
               style={visible ? undefined : { transition: `opacity 500ms ${200 + i * 100}ms, transform 500ms ${200 + i * 100}ms` }}
-              style={{ transitionDelay: `${200 + i * 100}ms` }}
             >
               <span className="text-3xl font-bold text-[#3b82f6]">
                 {item.step}

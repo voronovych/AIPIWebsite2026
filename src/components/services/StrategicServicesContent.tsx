@@ -575,13 +575,13 @@ function WhySection() {
 }
 
 const wheelSegments = [
+  "Patent Landscaping",
+  "Commercial Landscaping",
+  "Whitespace Analysis",
   "Full Patent Prosecution",
   "Valuation",
   "Licensing",
-  "Patent Landscaping",
-  "Commercial Landscaping",
   "Enforcement & Monetization",
-  "Whitespace Analysis",
 ];
 
 function ServiceWheelSection() {
@@ -605,12 +605,12 @@ function ServiceWheelSection() {
 
   const colors = [
     "#0c1425",
-    "#162036",
-    "#1a2a47",
     "#0f1a2e",
-    "#0c1425",
-    "#162036",
-    "#1a2a47",
+    "#121f37",
+    "#152440",
+    "#182949",
+    "#1b2e52",
+    "#1e335b",
   ];
 
   const wheelFontSize = "14";
@@ -714,6 +714,42 @@ function ServiceWheelSection() {
                           label
                         )}
                       </text>
+                    </g>
+                  );
+                })}
+                {/* Curved arrows on outside */}
+                {[0, 120, 240].map((offsetAngle) => {
+                  const arrowR = outerR + 28;
+                  const arcSpan = 35;
+                  const startA = offsetAngle;
+                  const endA = offsetAngle + arcSpan;
+                  const startRad = ((startA - 90) * Math.PI) / 180;
+                  const endRad = ((endA - 90) * Math.PI) / 180;
+                  const x1 = cx + arrowR * Math.cos(startRad);
+                  const y1 = cy + arrowR * Math.sin(startRad);
+                  const x2 = cx + arrowR * Math.cos(endRad);
+                  const y2 = cy + arrowR * Math.sin(endRad);
+                  // Arrowhead direction (tangent at end point)
+                  const tangentAngle = endRad - Math.PI / 2;
+                  const headLen = 7;
+                  const ah1x = x2 + headLen * Math.cos(tangentAngle - 0.5);
+                  const ah1y = y2 + headLen * Math.sin(tangentAngle - 0.5);
+                  const ah2x = x2 + headLen * Math.cos(tangentAngle + 0.5);
+                  const ah2y = y2 + headLen * Math.sin(tangentAngle + 0.5);
+                  return (
+                    <g key={offsetAngle}>
+                      <path
+                        d={`M ${x1} ${y1} A ${arrowR} ${arrowR} 0 0 1 ${x2} ${y2}`}
+                        fill="none"
+                        stroke="#9ca3af"
+                        strokeWidth="1.5"
+                        opacity="0.5"
+                      />
+                      <polygon
+                        points={`${x2},${y2} ${ah1x},${ah1y} ${ah2x},${ah2y}`}
+                        fill="#9ca3af"
+                        opacity="0.5"
+                      />
                     </g>
                   );
                 })}

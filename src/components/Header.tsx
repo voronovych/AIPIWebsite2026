@@ -14,6 +14,8 @@ const navigation = [
 
 const serviceLinks = [
   { name: "Strategic Patent Services", href: "/services/strategic" },
+  { name: "Technology", href: "/services/technology" },
+  { name: "Growth Facilitation", href: "/services/growth-facilitation" },
   { name: "Litigation Finance", href: "/services/litigation-finance" },
 ];
 
