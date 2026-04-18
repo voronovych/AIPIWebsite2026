@@ -14,8 +14,13 @@ export default function Hero() {
         className="object-cover object-center"
         priority
       />
-      {/* Dark overlay so text stays readable */}
-      <div className="absolute inset-0 bg-[#0c1425]/60" />
+      {/* Gradient overlay — dark on left for text, transparent on right to show image */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: "linear-gradient(to right, #0c1425 0%, rgba(12,20,37,0.85) 35%, rgba(12,20,37,0.4) 65%, rgba(12,20,37,0.2) 100%)",
+        }}
+      />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
         <div>

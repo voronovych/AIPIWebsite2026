@@ -61,20 +61,6 @@ body {
   animation: pulse-slow 8s ease-in-out 4s infinite;
 }
 
-.wheel-segment {
-  transform-origin: 250px 250px;
-  transition: transform 0.3s ease, filter 0.3s ease;
-  cursor: pointer;
-}
-
-.wheel-segment text {
-  pointer-events: none;
-}
-
-.wheel-segment:hover {
-  transform: scale(1.08);
-  filter: brightness(1.6);
-}
 
 @keyframes pulse-slow {
   0%, 100% { opacity: 0.6; transform: scale(1); }

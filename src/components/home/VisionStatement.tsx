@@ -3,8 +3,8 @@
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import ericHeadshot from "@/assets/Eric_Morehouse_BW_Headshot.png";
-import joeHeadshot from "@/assets/Joe_eaton.png";
+import ericHeadshot from "@/assets/headshots/Eric_Morehouse_BW_Headshot.png";
+import joeHeadshot from "@/assets/headshots/Joe_eaton.png";
 
 const founders = [
   {

@@ -161,6 +161,14 @@ export default function StrategicServicesContent() {
         <div className="absolute -top-20 -right-20 w-[700px] h-[700px] rounded-full bg-[#1d4ed8]/20 blur-[140px] animate-pulse-slow" />
         <div className="absolute -bottom-20 -left-20 w-[500px] h-[500px] rounded-full bg-[#3b82f6]/15 blur-[120px] animate-pulse-slow-delayed" />
 
+        {/* Left-to-right opacity gradient */}
+        <div
+          className="absolute inset-0 z-[1]"
+          style={{
+            background: "linear-gradient(to right, #0c1425 0%, #0c1425 30%, transparent 70%)",
+          }}
+        />
+
         <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
           <div className="max-w-3xl">
             <div className="flex items-center gap-3 mb-6">
@@ -170,8 +178,8 @@ export default function StrategicServicesContent() {
                 </span>
               </div>
               <h1 className="text-3xl font-bold tracking-tight text-white sm:text-5xl leading-[1.1]">
-                From unsorted IP to{" "}
-                <span className="text-white/40">actionable intelligence</span>
+                Supporting innovators from{" "}
+                <span className="text-white/40">ideation to monetization</span>
               </h1>
               <p className="mt-6 text-base leading-7 text-white/60 max-w-2xl">
                 Our strategic innovation services cover the entire lifecycle of R&D
@@ -438,13 +446,13 @@ function ProcessSection() {
               className={`relative border border-white/10 bg-white/[0.03] p-8 transition-all duration-500 hover:border-white/20 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
               style={{ transitionDelay: `${200 + i * 100}ms` }}
             >
-              <span className="text-3xl font-bold text-white/10">
+              <span className="text-3xl font-bold text-[#3b82f6]">
                 {item.step}
               </span>
               <h3 className="mt-3 text-base font-bold text-white">
                 {item.title}
               </h3>
-              <p className="mt-2 text-sm text-white/50 leading-relaxed">
+              <p className="mt-2 text-sm text-white/70 leading-relaxed">
                 {item.description}
               </p>
               {i < process.length - 1 && (
@@ -484,10 +492,10 @@ function IndustriesSection() {
           {industries.map((industry, i) => (
             <div
               key={industry.name}
-              className={`flex flex-col items-center text-center p-6 transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+              className={`group flex flex-col items-center text-center p-6 cursor-pointer transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
               style={{ transitionDelay: `${100 + i * 60}ms` }}
             >
-              <div className="w-24 h-24 rounded-full bg-[#e5e7eb]/60 flex items-center justify-center mb-4">
+              <div className="w-24 h-24 rounded-full bg-[#e5e7eb]/60 flex items-center justify-center mb-4 transition-transform duration-300 ease-out group-hover:scale-125">
                 <svg
                   className="w-10 h-10 text-[#1d4ed8]"
                   fill="none"
@@ -578,6 +586,7 @@ const wheelSegments = [
 
 function ServiceWheelSection() {
   const { ref, visible } = useReveal();
+  const [hoveredSegment, setHoveredSegment] = useState<number | null>(null);
 
   const segmentCount = wheelSegments.length;
   const angleStep = 360 / segmentCount;
@@ -629,8 +638,8 @@ function ServiceWheelSection() {
           </div>
 
           <div className="flex justify-center">
-            <div className="relative w-[500px] h-[500px]">
-              <svg viewBox="0 0 500 500" className="w-full h-full">
+            <div className="relative w-[500px] h-[500px] p-6">
+              <svg viewBox="0 0 500 500" className="w-full h-full overflow-visible">
                 {wheelSegments.map((label, i) => {
                   const startAngle = i * angleStep;
                   const endAngle = (i + 1) * angleStep;
@@ -663,10 +672,20 @@ function ServiceWheelSection() {
                   const line2 = words.slice(mid).join(" ");
                   const multiline = words.length > 1 && label.length > 10;
 
+                  const isHovered = hoveredSegment === i;
+
                   return (
                     <g
                       key={label}
-                      className="wheel-segment"
+                      onMouseEnter={() => setHoveredSegment(i)}
+                      onMouseLeave={() => setHoveredSegment(null)}
+                      style={{
+                        cursor: "pointer",
+                        transformOrigin: `${cx}px ${cy}px`,
+                        transform: isHovered ? "scale(1.08)" : "scale(1)",
+                        filter: isHovered ? "brightness(1.6)" : "brightness(1)",
+                        transition: "transform 0.25s ease, filter 0.25s ease",
+                      }}
                     >
                       <path
                         d={d}
@@ -678,8 +697,9 @@ function ServiceWheelSection() {
                         textAnchor="middle"
                         dominantBaseline="central"
                         fill="white"
-                        fontSize={wheelFontSize}
+                        fontSize={isHovered ? "16" : wheelFontSize}
                         fontWeight="600"
+                        style={{ pointerEvents: "none", transition: "font-size 0.25s ease" }}
                       >
                         {multiline ? (
                           <>
@@ -699,8 +719,11 @@ function ServiceWheelSection() {
                 })}
               </svg>
 
-              <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <div className="w-[185px] h-[185px] rounded-full bg-white flex flex-col items-center justify-center shadow-md">
+              <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                <Link
+                  href="/about"
+                  className="pointer-events-auto w-[185px] h-[185px] rounded-full bg-white flex flex-col items-center justify-center shadow-md hover:scale-110 hover:shadow-xl transition-all duration-300 cursor-pointer"
+                >
                   <Image
                     src={aipiLogo}
                     alt="AiPi"
@@ -709,7 +732,7 @@ function ServiceWheelSection() {
                   <span className="mt-2 text-2xl font-bold tracking-tight text-[#0c1425]">
                     AiPi
                   </span>
-                </div>
+                </Link>
               </div>
             </div>
           </div>

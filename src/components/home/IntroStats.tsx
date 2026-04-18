@@ -62,35 +62,39 @@ export default function IntroStats() {
   return (
     <section className="bg-white py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="grid gap-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
-          <div>
-            <h2 className="text-2xl font-bold tracking-tight text-[#0c1425] sm:text-3xl leading-tight">
-              Where technology, patents, finance, and commercialization intersect.
-            </h2>
-            <p className="mt-6 text-base leading-7 text-[#4b5563]">
-              AiPi operates at the intersection of product direction, patent
-              positioning, finance, and commercialization. That overlap is the
-              point, because it is where material business value is often won
-              or lost. We bring multidisciplinary expertise that other
-              consultancies simply do not offer.
-            </p>
-            <Link
-              href="/about"
-              className="mt-8 inline-flex items-center text-base font-semibold text-[#1d4ed8] hover:text-[#1e40af] transition-colors"
+        {/* Stats row */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-0 border-b border-[#e5e7eb] pb-12 mb-12">
+          {stats.map((stat, i) => (
+            <div
+              key={stat.label}
+              className={`text-center py-6 sm:py-0 ${i > 0 ? "border-t sm:border-t-0 sm:border-l border-[#e5e7eb]" : ""}`}
             >
-              About the Firm &rarr;
-            </Link>
-          </div>
-          <div className="grid gap-px overflow-hidden border border-[#e5e7eb] bg-[#e5e7eb]">
-            {stats.map((stat) => (
-              <div key={stat.label} className="bg-white px-8 py-8">
-                <p className="text-3xl font-bold tracking-tight text-[#0c1425]">
-                  {stat.prefix}<CountUp end={stat.end} />{stat.suffix}
-                </p>
-                <p className="mt-2 text-base text-[#6b7280]">{stat.label}</p>
-              </div>
-            ))}
-          </div>
+              <p className="text-5xl font-bold tracking-tight text-[#0c1425]">
+                {stat.prefix}<CountUp end={stat.end} />{stat.suffix}
+              </p>
+              <p className="mt-2 text-sm text-[#6b7280]">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Text */}
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-2xl font-bold tracking-tight text-[#0c1425] sm:text-3xl leading-tight">
+            Where technology, patents, finance, and commercialization intersect.
+          </h2>
+          <p className="mt-4 text-base leading-7 text-[#4b5563]">
+            AiPi operates at the intersection of product direction, patent
+            positioning, finance, and commercialization. That overlap is the
+            point — it is where material business value is often won
+            or lost. We bring multidisciplinary expertise that other
+            consultancies simply do not offer.
+          </p>
+          <Link
+            href="/about"
+            className="mt-6 inline-flex items-center text-base font-semibold text-[#1d4ed8] hover:text-[#1e40af] transition-colors"
+          >
+            About the Firm &rarr;
+          </Link>
         </div>
       </div>
     </section>
