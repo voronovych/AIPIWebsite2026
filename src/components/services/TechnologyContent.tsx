@@ -584,6 +584,7 @@ function KnowledgeGraphSection() {
                 </div>
               ))}
             </div>
+            <p className="mt-4 text-sm text-white/40 italic">...and more</p>
           </div>
         </div>
       </div>
