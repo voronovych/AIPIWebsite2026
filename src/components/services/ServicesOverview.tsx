@@ -409,10 +409,10 @@ function LandscapeMini({ visible }: { visible: boolean }) {
 function LifecycleMini({ visible }: { visible: boolean }) {
   const items = [
     { label: "Fundraising Strategy", icon: "DOLLAR" },
-    { label: "Innovation Strategy", icon: "M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707" },
+    { label: "Innovation Strategy", icon: "M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" },
     { label: "Regulatory Support & Logistics", icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" },
     { label: "Operations Scaling & Commercialisation", icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" },
-    { label: "Business Owner Exit Planning", icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0" },
+    { label: "Business Owner Exit Planning", icon: "COINS" },
   ];
 
   return (
@@ -423,7 +423,15 @@ function LifecycleMini({ visible }: { visible: boolean }) {
             <div className="group flex flex-col items-center text-center w-32">
               <div className="w-16 h-16 rounded-full bg-[#1d4ed8]/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 {item.icon === "DOLLAR" ? (
-                  <span className="text-2xl font-bold text-[#1d4ed8]">$</span>
+                  <span className="text-2xl font-normal text-[#1d4ed8]">$</span>
+                ) : item.icon === "COINS" ? (
+                  <svg className="w-7 h-7 text-[#1d4ed8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <ellipse cx="12" cy="17" rx="7" ry="3" strokeLinecap="round" strokeLinejoin="round" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 17v-3c0 1.657 3.134 3 7 3s7-1.343 7-3v3" />
+                    <ellipse cx="12" cy="11" rx="7" ry="3" strokeLinecap="round" strokeLinejoin="round" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 11V8c0 1.657 3.134 3 7 3s7-1.343 7-3v3" />
+                    <ellipse cx="12" cy="5" rx="7" ry="3" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
                 ) : (
                   <svg className="w-7 h-7 text-[#1d4ed8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d={item.icon} />

@@ -23,6 +23,18 @@ export const metadata: Metadata = {
   description:
     "AiPi helps technology companies develop, protect, and monetize innovation through strategic patent services, AI-driven patent intelligence, fundraising and diligence support, and go-to-market facilitation.",
   metadataBase: new URL("https://aipisolutions.com"),
+  icons: {
+    icon: [
+      {
+        url: "/favicon-dark-32.png",
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        url: "/favicon-white-32.png",
+        media: "(prefers-color-scheme: dark)",
+      },
+    ],
+  },
   openGraph: {
     type: "website",
     locale: "en_US",

@@ -25,7 +25,7 @@ const categories = [
 const posts: Post[] = [
   {
     title: "Rice Hosts AiPi's MD/CTO Joe Eaton for Invited AI Talk",
-    date: "2024",
+    date: "2026",
     category: "Speaking Engagements",
     excerpt:
       "Dr. Eaton presented on AI applications using Graph Neural Networks (GNNs) to detect complex patterns that would be difficult to identify through traditional methods. The talk explored how modern AI techniques are transforming patent analysis and IP intelligence.",
@@ -34,19 +34,10 @@ const posts: Post[] = [
     featured: true,
   },
   {
-    title: "AiPi Welcomes Joe Eaton as Co-Owner",
-    date: "2023",
-    category: "Company News",
-    excerpt:
-      "Joe Eaton joined AiPi as co-owner to guide growth, bringing experience in advanced engineering, applied mathematics, and large-scale data problems. He will focus on elevating software capabilities and strengthening organizational infrastructure to drive the next phase of AiPi's evolution.",
-    image:
-      "https://static.wixstatic.com/media/498fe4_2fcc0de329b846229fe1381b04d6d6bc~mv2.jpg/v1/fill/w_600,h_600,fp_0.50_0.50,q_90/498fe4_2fcc0de329b846229fe1381b04d6d6bc~mv2.jpg",
-    featured: true,
-  },
-  {
     title: "Eric Morehouse Speaks at University of Michigan's Ross School of Business",
     date: "November 16, 2022",
     category: "Speaking Engagements",
+    featured: true,
     excerpt:
       "Morehouse addressed 450 participants at the V1 Startup Fair on fundraising, revenue strategies, scaling, and founder exits. The presentation covered how early-stage companies can leverage patent strategy to accelerate growth and attract investment.",
     image:
