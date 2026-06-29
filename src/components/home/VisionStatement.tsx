@@ -1,52 +1,20 @@
-"use client";
-
-import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ericHeadshot from "@/assets/headshots/Eric_Morehouse_BW_Headshot.png";
-import joeHeadshot from "@/assets/headshots/Joe_eaton.png";
 
-const founders = [
-  {
-    name: "Eric Morehouse",
-    title: "Founder, Managing Director",
-    quote:
-      "Our work sits at the intersection of product direction, patent positioning, finance, and commercialization. This is where material business value is often won or lost.",
-  },
-  {
-    name: "Joe Eaton",
-    title: "CTO, Managing Director",
-    quote:
-      "I'm excited to bring the power of GNNs to IP analysis and valuation. Knowledge Graphs are the future of AI, and combining this with strong litigation experience make AiPi uniquely effective in this industry.",
-  },
-];
+const founder = {
+  name: "Eric Morehouse",
+  title: "Founder, Managing Director",
+  quote:
+    "Our work sits at the intersection of product direction, patent positioning, finance, and commercialization. This is where material business value is often won or lost.",
+};
 
 export default function VisionStatement() {
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-
-  const advance = useCallback(
-    () => setActive((i) => (i + 1) % founders.length),
-    [],
-  );
-
-  useEffect(() => {
-    if (paused) return;
-    const id = setInterval(advance, 6000);
-    return () => clearInterval(id);
-  }, [paused, advance]);
-
   return (
-    <section
-      className="relative bg-white py-10 sm:py-14 overflow-hidden"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
+    <section className="relative bg-white py-10 sm:py-14 overflow-hidden">
       {/* Eric's photo — full section height, anchored right */}
       <div
-        className={`hidden lg:block absolute inset-y-0 right-0 transition-opacity duration-700 ${
-          active === 0 ? "opacity-100" : "opacity-0"
-        }`}
+        className="hidden lg:block absolute inset-y-0 right-0"
         style={{ aspectRatio: "1 / 1", height: "100%" }}
       >
         <Image
@@ -57,66 +25,21 @@ export default function VisionStatement() {
         />
       </div>
 
-      {/* Joe's photo — full section height, anchored left (mirrored) */}
-      <div
-        className={`hidden lg:block absolute inset-y-0 left-0 transition-opacity duration-700 ${
-          active === 1 ? "opacity-100" : "opacity-0"
-        }`}
-        style={{ aspectRatio: "1 / 1", height: "100%" }}
-      >
-        <Image
-          src={joeHeadshot}
-          alt="Joe Eaton"
-          fill
-          className="object-cover object-top grayscale"
-        />
-      </div>
-
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="relative min-h-[220px] sm:min-h-[200px]">
-          {founders.map((founder, index) => (
-            <div
-              key={founder.name}
-              className={`absolute inset-0 transition-opacity duration-700 ${
-                index === active
-                  ? "opacity-100 pointer-events-auto"
-                  : "opacity-0 pointer-events-none"
-              }`}
-              aria-hidden={index !== active}
-            >
-              <div className={`flex h-full flex-col justify-center ${
-                index === 0 ? "items-start text-left lg:max-w-[70%]" : "items-end text-right lg:max-w-[70%] lg:ml-auto"
-              }`}>
-                <div className="bg-white/90 backdrop-blur-sm p-4 sm:p-6 inline-block">
-                  <p className="text-lg font-medium italic leading-7 text-[#0c1425] sm:text-xl sm:leading-8">
-                    &ldquo;{founder.quote}&rdquo;
-                  </p>
-                  <p className="mt-6 text-base font-semibold text-[#0c1425]">
-                    {founder.name}
-                  </p>
-                  <p className="text-base text-[#6b7280]">{founder.title}</p>
-                </div>
-              </div>
-            </div>
-          ))}
+        <div className="flex flex-col justify-center items-start text-left lg:max-w-[70%]">
+          <div className="bg-white/90 backdrop-blur-sm p-4 sm:p-6 inline-block">
+            <p className="text-lg font-medium italic leading-7 text-[#0c1425] sm:text-xl sm:leading-8">
+              &ldquo;{founder.quote}&rdquo;
+            </p>
+            <p className="mt-6 text-base font-semibold text-[#0c1425]">
+              {founder.name}
+            </p>
+            <p className="text-base text-[#6b7280]">{founder.title}</p>
+          </div>
         </div>
 
-        {/* Dots + link */}
+        {/* Link */}
         <div className="mt-6 flex flex-col items-center gap-3">
-          <div className="flex gap-2">
-            {founders.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setActive(i)}
-                aria-label={`Show quote ${i + 1}`}
-                className={`h-2 transition-all duration-300 ${
-                  i === active
-                    ? "w-8 bg-[#1d4ed8]"
-                    : "w-2 bg-[#0c1425]/15 hover:bg-[#0c1425]/30"
-                }`}
-              />
-            ))}
-          </div>
           <Link
             href="/about"
             className="text-base font-semibold text-[#6b7280] hover:text-[#0c1425] transition-colors"
