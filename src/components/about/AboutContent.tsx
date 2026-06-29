@@ -10,6 +10,7 @@ import {
   Marker,
 } from "react-simple-maps";
 import ericHeadshot from "@/assets/headshots/Eric_Morehouse_Color.webp";
+import joeHeadshot from "@/assets/headshots/Joe_Eaton_Color.jpg";
 import meteHeadshot from "@/assets/headshots/MeteOzmen.png";
 import drewHeadshot from "@/assets/headshots/DrewDavis.png";
 import jennHeadshot from "@/assets/headshots/Jenn.jpeg";
@@ -69,6 +70,14 @@ const executiveTeam = [
     bio: "Veteran IP attorney and entrepreneur with over 30 years' experience advising clients including the DoD on commercialising cutting-edge IP.",
     image: ericHeadshot,
     href: "/about/team/eric-morehouse",
+  },
+  {
+    name: "Joe Eaton",
+    title: "CTO, Managing Director",
+    bio: "One of America's leading AI scientists and managers with 13 years' service at NVIDIA, culminating as Distinguished System Engineer for Data & Graph Analytics.",
+    image: joeHeadshot,
+    flip: true,
+    href: "/about/team/joe-eaton",
   },
   {
     name: "Mete Ozmen",
@@ -491,7 +500,7 @@ function TeamSection() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-3xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 max-w-5xl mx-auto">
           {executiveTeam.map((member, i) => (
             <TeamMemberCard
               key={member.name}

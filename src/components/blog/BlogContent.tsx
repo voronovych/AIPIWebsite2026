@@ -24,6 +24,16 @@ const categories = [
 
 const posts: Post[] = [
   {
+    title: "Rice Hosts AiPi's MD/CTO Joe Eaton for Invited AI Talk",
+    date: "2026",
+    category: "Speaking Engagements",
+    excerpt:
+      "Dr. Eaton presented on AI applications using Graph Neural Networks (GNNs) to detect complex patterns that would be difficult to identify through traditional methods. The talk explored how modern AI techniques are transforming patent analysis and IP intelligence.",
+    image:
+      "https://static.wixstatic.com/media/ab6fb3_8076134e4863475494b959dc209049bc~mv2.jpg/v1/fill/w_600,h_600,fp_0.50_0.50,q_90/ab6fb3_8076134e4863475494b959dc209049bc~mv2.jpg",
+    featured: true,
+  },
+  {
     title: "Eric Morehouse Speaks at University of Michigan's Ross School of Business",
     date: "November 16, 2022",
     category: "Speaking Engagements",
