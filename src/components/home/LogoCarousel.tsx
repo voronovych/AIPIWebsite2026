@@ -98,6 +98,7 @@ export default function LogoCarousel() {
                     src={logo.src}
                     alt={logo.alt}
                     fill
+                    sizes="176px"
                     className="object-contain"
                   />
                 ) : (
