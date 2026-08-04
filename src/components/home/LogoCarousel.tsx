@@ -14,28 +14,43 @@ import NaturalVenturesLogo from "@/assets/CompanyLogos/NaturalVenturesLogo.svg";
 import GenfoquestLogo from "@/assets/CompanyLogos/GenfoquestLogo.svg";
 import CaliberLogo from "@/assets/CompanyLogos/CaliberLogo.svg";
 import AccumontLogo from "@/assets/CompanyLogos/AccumontLogo.svg";
+import PhysicsLogicLogo from "@/assets/CompanyLogos/PhysicsLogicLogo.png";
+import TellapureLogo from "@/assets/CompanyLogos/TellapureLogo.png";
+import EmergentLogo from "@/assets/CompanyLogos/EmergentLogo.png";
+import PolarisLogo from "@/assets/CompanyLogos/PolarisLogo.png";
+import BioSymetricsLogo from "@/assets/CompanyLogos/BioSymetricsLogo.png";
 
-const row1 = [
+type LogoItem = { src: import("next/image").StaticImageData; alt: string } | { text: string };
+
+const row1: LogoItem[] = [
   { src: SymmatricsLogo, alt: "Symmatrics" },
   { src: VectigoLogo, alt: "Vectigo" },
   { src: VerdelisLogo, alt: "Verdelis" },
   { src: NewSapienceLogo, alt: "New Sapience" },
   { src: ETCapitalLogo, alt: "ET Capital" },
   { src: APSLogo, alt: "APS" },
+  { src: PhysicsLogicLogo, alt: "PhysicsLogic" },
+  { text: "Bugs For Birds" },
+  { src: TellapureLogo, alt: "Tellapure" },
+  { src: EmergentLogo, alt: "Emergent" },
 ];
 
-const row2 = [
+const row2: LogoItem[] = [
   { src: GroNaturalLogo, alt: "GroNatural" },
   { src: PreVueLogo, alt: "PreVue" },
   { src: NaturalVenturesLogo, alt: "Natural Ventures" },
   { src: GenfoquestLogo, alt: "Genfoquest" },
   { src: CaliberLogo, alt: "Caliber" },
   { src: AccumontLogo, alt: "Accumont" },
+  { src: PolarisLogo, alt: "Polaris Partner Group" },
+  { text: "MissionPivot" },
+  { src: BioSymetricsLogo, alt: "BioSymetrics" },
 ];
 
+// Keep scroll speed constant as rows grow: 45s was tuned for 6 logos per row.
 const rows = [
-  { logos: row1, animation: "animate-scroll" },
-  { logos: row2, animation: "animate-scroll-reverse" },
+  { logos: row1, animation: "animate-scroll", duration: `${(45 * row1.length) / 6}s` },
+  { logos: row2, animation: "animate-scroll-reverse", duration: `${(45 * row2.length) / 6}s` },
 ];
 
 export default function LogoCarousel() {
@@ -71,19 +86,25 @@ export default function LogoCarousel() {
           <div
             key={rowIndex}
             className={`relative z-[2] flex items-center gap-20 ${row.animation} ${rowIndex > 0 ? "mt-14" : ""}`}
-            style={{ width: "max-content" }}
+            style={{ width: "max-content", animationDuration: row.duration }}
           >
             {tripled.map((logo, i) => (
               <div
-                key={`${logo.alt}-${rowIndex}-${i}`}
+                key={`${"alt" in logo ? logo.alt : logo.text}-${rowIndex}-${i}`}
                 className="flex-shrink-0 h-12 w-44 relative opacity-60 hover:opacity-90 transition-all duration-300"
               >
-                <Image
-                  src={logo.src}
-                  alt={logo.alt}
-                  fill
-                  className="object-contain"
-                />
+                {"src" in logo ? (
+                  <Image
+                    src={logo.src}
+                    alt={logo.alt}
+                    fill
+                    className="object-contain"
+                  />
+                ) : (
+                  <span className="flex h-full w-full items-center justify-center whitespace-nowrap text-xl font-semibold tracking-wide text-white">
+                    {logo.text}
+                  </span>
+                )}
               </div>
             ))}
           </div>
