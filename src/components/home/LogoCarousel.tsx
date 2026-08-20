@@ -17,7 +17,9 @@ import AccumontLogo from "@/assets/CompanyLogos/AccumontLogo.svg";
 import PhysicsLogicLogo from "@/assets/CompanyLogos/PhysicsLogicLogo.png";
 import TellapureLogo from "@/assets/CompanyLogos/TellapureLogo.png";
 import EmergentLogo from "@/assets/CompanyLogos/EmergentLogo.png";
-import PolarisLogo from "@/assets/CompanyLogos/PolarisLogo.png";
+// Polaris Partner Group temporarily removed from the carousel.
+// To restore, uncomment this import and its row2 entry below.
+// import PolarisLogo from "@/assets/CompanyLogos/PolarisLogo.png";
 import BioSymetricsLogo from "@/assets/CompanyLogos/BioSymetricsLogo.png";
 
 type LogoItem = { src: import("next/image").StaticImageData; alt: string } | { text: string };
@@ -42,7 +44,7 @@ const row2: LogoItem[] = [
   { src: GenfoquestLogo, alt: "Genfoquest" },
   { src: CaliberLogo, alt: "Caliber" },
   { src: AccumontLogo, alt: "Accumont" },
-  { src: PolarisLogo, alt: "Polaris Partner Group" },
+  // { src: PolarisLogo, alt: "Polaris Partner Group" },
   { text: "MissionPivot" },
   { src: BioSymetricsLogo, alt: "BioSymetrics" },
 ];
