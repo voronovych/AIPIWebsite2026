@@ -12,7 +12,6 @@ import {
 import ericHeadshot from "@/assets/headshots/Eric_Morehouse_Color.webp";
 import meteHeadshot from "@/assets/headshots/MeteOzmen.png";
 import drewHeadshot from "@/assets/headshots/DrewDavis.png";
-import jennHeadshot from "@/assets/headshots/Jenn.jpeg";
 import alexHeadshot from "@/assets/headshots/AlexanderGalambos.png";
 
 const GEO_URL = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
@@ -86,12 +85,6 @@ const bizDevTeam = [
     title: "Senior VP of Worldwide Business Development",
     bio: "Oxford-educated COO and Chief of Staff with multi-sector organisational experience building teams to solve complex operational challenges.",
     image: drewHeadshot,
-  },
-  {
-    name: "Jennifer Hayes",
-    title: "VP of North American Business Development",
-    bio: "Experienced business development executive driving growth and strategic partnerships across North American markets.",
-    image: jennHeadshot,
   },
   {
     name: "Alexander Galambos",
@@ -509,7 +502,7 @@ function TeamSection() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-3xl mx-auto">
           {bizDevTeam.map((member, i) => (
             <TeamMemberCard
               key={member.name}
