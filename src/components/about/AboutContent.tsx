@@ -13,6 +13,12 @@ import ericHeadshot from "@/assets/headshots/Eric_Morehouse_Color.webp";
 import meteHeadshot from "@/assets/headshots/MeteOzmen.png";
 import drewHeadshot from "@/assets/headshots/DrewDavis.png";
 import alexHeadshot from "@/assets/headshots/AlexanderGalambos.png";
+import maxHeadshot from "@/assets/headshots/MaxMorehouse.jpg";
+import seanHeadshot from "@/assets/headshots/SeanLewis.jpg";
+import stephenHeadshot from "@/assets/headshots/StephenTung.jpg";
+import coleHeadshot from "@/assets/headshots/ColeMorehouse.jpg";
+import markianHeadshot from "@/assets/headshots/MarkianVoronovych.jpg";
+import berkeHeadshot from "@/assets/headshots/BerkeAl.jpg";
 
 const GEO_URL = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
@@ -91,6 +97,41 @@ const bizDevTeam = [
     title: "VP of European Business Development",
     bio: "Seasoned business development leader with deep expertise across European markets, connecting innovators with strategic opportunities.",
     image: alexHeadshot,
+  },
+  {
+    name: "Max Morehouse",
+    title: "Internal / External Finance",
+    bio: "Max has four years of finance experience, having served as Associate at MidCap Financial, an Apollo-backed private credit firm. BBA in Finance from William & Mary.",
+    image: maxHeadshot,
+  },
+];
+
+const analysisTeam = [
+  {
+    name: "Sean Lewis",
+    title: "Project Manager",
+    image: seanHeadshot,
+  },
+  {
+    name: "Stephen Tung",
+    title: "Patent Analyst",
+    image: stephenHeadshot,
+  },
+  {
+    name: "Cole Morehouse",
+    title: "Project Manager",
+    image: coleHeadshot,
+  },
+  {
+    name: "Markian Voronovych",
+    title: "Senior Engineer",
+    image: markianHeadshot,
+    flip: true,
+  },
+  {
+    name: "Berke Al",
+    title: "Data Engineer",
+    image: berkeHeadshot,
   },
 ];
 
@@ -430,7 +471,7 @@ function TeamMemberCard({
   visible,
   delay,
 }: {
-  member: { name: string; title: string; subtitle?: string; bio: string; image: typeof ericHeadshot; flip?: boolean; href?: string };
+  member: { name: string; title: string; subtitle?: string; bio?: string; image: typeof ericHeadshot; flip?: boolean; href?: string };
   visible: boolean;
   delay: number;
 }) {
@@ -454,9 +495,11 @@ function TeamMemberCard({
       {member.subtitle && (
         <p className="text-sm text-[#6b7280] mt-0.5">{member.subtitle}</p>
       )}
-      <p className="mt-3 text-sm text-[#6b7280] leading-relaxed">
-        {member.bio}
-      </p>
+      {member.bio && (
+        <p className="mt-3 text-sm text-[#6b7280] leading-relaxed">
+          {member.bio}
+        </p>
+      )}
     </div>
   );
 
@@ -502,8 +545,26 @@ function TeamSection() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-3xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 max-w-3xl mx-auto">
           {bizDevTeam.map((member, i) => (
+            <TeamMemberCard
+              key={member.name}
+              member={member}
+              visible={visible}
+              delay={200 + i * 150}
+            />
+          ))}
+        </div>
+
+        {/* Analysis Team */}
+        <div className="text-center mt-20 mb-14">
+          <h2 className="text-2xl font-bold tracking-tight text-[#0c1425] sm:text-3xl">
+            Analysis Team
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 max-w-3xl mx-auto">
+          {analysisTeam.map((member, i) => (
             <TeamMemberCard
               key={member.name}
               member={member}
