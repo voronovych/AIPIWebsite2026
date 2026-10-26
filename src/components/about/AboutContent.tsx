@@ -83,6 +83,12 @@ const executiveTeam = [
     image: meteHeadshot,
     href: "/about/team/mete-ozmen",
   },
+  {
+    name: "Max Morehouse",
+    title: "Internal / External Finance",
+    bio: "Max has four years of finance experience, having served as Associate at MidCap Financial, an Apollo-backed private credit firm. BBA in Finance from William & Mary.",
+    image: maxHeadshot,
+  },
 ];
 
 const bizDevTeam = [
@@ -97,12 +103,6 @@ const bizDevTeam = [
     title: "VP of European Business Development",
     bio: "Seasoned business development leader with deep expertise across European markets, connecting innovators with strategic opportunities.",
     image: alexHeadshot,
-  },
-  {
-    name: "Max Morehouse",
-    title: "Internal / External Finance",
-    bio: "Max has four years of finance experience, having served as Associate at MidCap Financial, an Apollo-backed private credit firm. BBA in Finance from William & Mary.",
-    image: maxHeadshot,
   },
 ];
 
@@ -527,7 +527,7 @@ function TeamSection() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-3xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 max-w-3xl mx-auto">
           {executiveTeam.map((member, i) => (
             <TeamMemberCard
               key={member.name}
@@ -545,7 +545,7 @@ function TeamSection() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 max-w-3xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-lg mx-auto">
           {bizDevTeam.map((member, i) => (
             <TeamMemberCard
               key={member.name}
@@ -556,10 +556,10 @@ function TeamSection() {
           ))}
         </div>
 
-        {/* Analysis Team */}
+        {/* Engineering and Analysis Team */}
         <div className="text-center mt-20 mb-14">
           <h2 className="text-2xl font-bold tracking-tight text-[#0c1425] sm:text-3xl">
-            Analysis Team
+            Engineering and Analysis Team
           </h2>
         </div>
 
