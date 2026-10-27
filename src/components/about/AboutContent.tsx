@@ -13,6 +13,7 @@ import ericHeadshot from "@/assets/headshots/Eric_Morehouse_Color.webp";
 import meteHeadshot from "@/assets/headshots/MeteOzmen.png";
 import drewHeadshot from "@/assets/headshots/DrewDavis.png";
 import alexHeadshot from "@/assets/headshots/AlexanderGalambos.png";
+import markHymanHeadshot from "@/assets/headshots/MarkHyman.jpg";
 import maxHeadshot from "@/assets/headshots/MaxMorehouse.jpg";
 import seanHeadshot from "@/assets/headshots/SeanLewis.jpg";
 import stephenHeadshot from "@/assets/headshots/StephenTung.jpg";
@@ -92,6 +93,12 @@ const executiveTeam = [
 ];
 
 const bizDevTeam = [
+  {
+    name: "Mark Hyman",
+    title: "Chief Revenue Officer and Business Development Director",
+    bio: "Mark has over 40 years of industry, military, and government service in the US and abroad. He graduated from the US Naval Academy and retired as a Captain (O-6).",
+    image: markHymanHeadshot,
+  },
   {
     name: "Drew Davis",
     title: "Senior VP of Worldwide Business Development",
@@ -545,7 +552,7 @@ function TeamSection() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-lg mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 max-w-3xl mx-auto">
           {bizDevTeam.map((member, i) => (
             <TeamMemberCard
               key={member.name}
