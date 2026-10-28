@@ -2,11 +2,24 @@
 
 import { type FormState, getField, isValidEmail } from "@/utils/formValidation";
 import { sendFormEmail } from "@/utils/sendFormEmail";
+import { checkFormTurnstile } from "@/utils/turnstile";
+import { TURNSTILE_ACTIONS, TURNSTILE_FAILED_MESSAGE } from "@/utils/turnstileActions";
 
 export async function submitContactForm(
   _prevState: FormState,
   formData: FormData,
 ): Promise<FormState> {
+  const turnstile = await checkFormTurnstile(formData, TURNSTILE_ACTIONS.contact);
+  if (turnstile !== "ok") {
+    return {
+      status: "error",
+      message:
+        turnstile === "failed"
+          ? TURNSTILE_FAILED_MESSAGE
+          : "Something went wrong sending your message. Please email us directly at tech-admin@aipisolutions.com.",
+    };
+  }
+
   const name = getField(formData, "name", 200);
   const phone = getField(formData, "phone", 50);
   const email = getField(formData, "email", 254);

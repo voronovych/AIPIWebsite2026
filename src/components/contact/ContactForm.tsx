@@ -1,9 +1,11 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 
 import { submitContactForm } from "@/app/contact/actions";
+import TurnstileWidget from "@/components/TurnstileWidget";
 import { IDLE_FORM_STATE } from "@/utils/formValidation";
+import { TURNSTILE_ACTIONS, TURNSTILE_SITE_KEY } from "@/utils/turnstileActions";
 
 const fieldClassName =
   "w-full border border-[#d1d5db] bg-white px-4 py-3 text-sm text-[#0c1425] placeholder-[#9ca3af] focus:border-[#1d4ed8] focus:ring-1 focus:ring-[#1d4ed8] focus:outline-none transition-colors";
@@ -14,6 +16,14 @@ export default function ContactForm() {
     submitContactForm,
     IDLE_FORM_STATE,
   );
+  const [hasToken, setHasToken] = useState(false);
+  const [turnstileResetKey, setTurnstileResetKey] = useState(0);
+
+  // Turnstile tokens are single-use: request a fresh one after each submit.
+  function handleSubmit(formData: FormData) {
+    formAction(formData);
+    setTurnstileResetKey((key) => key + 1);
+  }
 
   if (state.status === "success") {
     return (
@@ -30,7 +40,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form action={formAction} className="space-y-6">
+    <form action={handleSubmit} className="space-y-6">
       <div>
         <label htmlFor="name" className={labelClassName}>
           Name *
@@ -86,6 +96,20 @@ export default function ContactForm() {
         />
       </div>
 
+      {TURNSTILE_SITE_KEY ? (
+        <TurnstileWidget
+          siteKey={TURNSTILE_SITE_KEY}
+          action={TURNSTILE_ACTIONS.contact}
+          resetKey={turnstileResetKey}
+          onToken={setHasToken}
+        />
+      ) : (
+        <p role="alert" className="text-sm text-[#b91c1c]">
+          This form is temporarily unavailable. Please email us directly at
+          tech-admin@aipisolutions.com.
+        </p>
+      )}
+
       {state.status === "error" && (
         <p role="alert" className="text-sm text-[#b91c1c]">
           {state.message}
@@ -94,7 +118,7 @@ export default function ContactForm() {
 
       <button
         type="submit"
-        disabled={pending}
+        disabled={pending || !hasToken}
         className="w-full bg-[#1d4ed8] text-white py-3 text-base font-semibold hover:bg-[#1e40af] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {pending ? "Sending…" : "Send Message"}

@@ -10,6 +10,8 @@ import {
   OVERSIZE_RESUME_MESSAGE,
 } from "@/utils/formValidation";
 import { type EmailAttachment, sendFormEmail } from "@/utils/sendFormEmail";
+import { checkFormTurnstile } from "@/utils/turnstile";
+import { TURNSTILE_ACTIONS, TURNSTILE_FAILED_MESSAGE } from "@/utils/turnstileActions";
 
 const RESUME_CONTENT_TYPES: Record<string, string> = {
   ".pdf": "application/pdf",
@@ -22,6 +24,17 @@ export async function submitCareersForm(
   _prevState: FormState,
   formData: FormData,
 ): Promise<FormState> {
+  const turnstile = await checkFormTurnstile(formData, TURNSTILE_ACTIONS.careers);
+  if (turnstile !== "ok") {
+    return {
+      status: "error",
+      message:
+        turnstile === "failed"
+          ? TURNSTILE_FAILED_MESSAGE
+          : "Something went wrong sending your application. Please email us directly at tech-admin@aipisolutions.com.",
+    };
+  }
+
   const firstName = getField(formData, "firstName", 100);
   const lastName = getField(formData, "lastName", 100);
   const phone = getField(formData, "phone", 50);

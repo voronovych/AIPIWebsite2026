@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import leifLogo from "@/assets/leif-horizontal-blue.svg";
 
 /* ───────────────────── animation hook ───────────────────── */
 
@@ -62,7 +64,7 @@ export default function TechnologyContent() {
               We don&apos;t just advise — we build. AiPi develops proprietary
               software platforms powered by AI, knowledge graphs, and
               geospatial intelligence that transform raw data into competitive
-              advantage.
+              advantage — including LeifAI, our automated patent software.
             </p>
             <div className="mt-8 flex items-center gap-x-6">
               <Link
@@ -145,8 +147,14 @@ function PatentLandscapeSection() {
           <h2 className="mt-3 text-2xl font-bold tracking-tight text-[#0c1425] sm:text-3xl leading-tight">
             Patent Landscape Intelligence
           </h2>
+          <Image
+            src={leifLogo}
+            alt="LeifAI"
+            className="mt-4 h-8 w-auto"
+          />
           <p className="mt-4 text-base text-[#4b5563] leading-relaxed">
-            Our proprietary landscape system generates structured competitive
+            Powered by LeifAI, our automated patent software, our proprietary
+            landscape system generates structured competitive
             intelligence reports — mapping your IP position against the entire
             patent landscape in your domain. Each report includes patentability
             analysis, competitor mapping, disclosure depth scoring, and a

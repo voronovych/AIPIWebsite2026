@@ -3,6 +3,8 @@
 import { useActionState, useState } from "react";
 
 import { submitCareersForm } from "@/app/careers/actions";
+import TurnstileWidget from "@/components/TurnstileWidget";
+import { TURNSTILE_ACTIONS, TURNSTILE_SITE_KEY } from "@/utils/turnstileActions";
 import {
   getFileExtension,
   IDLE_FORM_STATE,
@@ -22,6 +24,8 @@ export default function CareersForm() {
     IDLE_FORM_STATE,
   );
   const [resumeError, setResumeError] = useState<string | null>(null);
+  const [hasToken, setHasToken] = useState(false);
+  const [turnstileResetKey, setTurnstileResetKey] = useState(0);
 
   // Screen the attachment before submitting: a body over the server action's
   // size limit is rejected by the runtime, which unmounts the form and
@@ -42,6 +46,8 @@ export default function CareersForm() {
 
     setResumeError(null);
     formAction(formData);
+    // Turnstile tokens are single-use: request a fresh one after each submit.
+    setTurnstileResetKey((key) => key + 1);
   }
 
   const errorMessage =
@@ -161,6 +167,20 @@ export default function CareersForm() {
         />
       </div>
 
+      {TURNSTILE_SITE_KEY ? (
+        <TurnstileWidget
+          siteKey={TURNSTILE_SITE_KEY}
+          action={TURNSTILE_ACTIONS.careers}
+          resetKey={turnstileResetKey}
+          onToken={setHasToken}
+        />
+      ) : (
+        <p role="alert" className="text-sm text-[#b91c1c]">
+          This form is temporarily unavailable. Please email us directly at
+          tech-admin@aipisolutions.com.
+        </p>
+      )}
+
       {errorMessage && (
         <p role="alert" className="text-sm text-[#b91c1c]">
           {errorMessage}
@@ -169,7 +189,7 @@ export default function CareersForm() {
 
       <button
         type="submit"
-        disabled={pending}
+        disabled={pending || !hasToken}
         className="w-full bg-[#1d4ed8] text-white py-3 text-base font-semibold hover:bg-[#1e40af] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {pending ? "Submitting…" : "Submit Application"}

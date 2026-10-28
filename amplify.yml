@@ -6,6 +6,7 @@ frontend:
         - npm install --legacy-peer-deps
     build:
       commands:
+        - env | grep -E '^(NEXT_PUBLIC_TURNSTILE_|TURNSTILE_SECRET_KEY=|SITE_URL=)' >> .env.production || true
         - npx next build
   artifacts:
     baseDirectory: .next
