@@ -37,6 +37,7 @@ import {
   inputClassName,
   labelClassName,
 } from "./Field";
+import SearchableSelect from "./SearchableSelect";
 import SystemsPicker, { SEARCH_INPUT_ID } from "./SystemsPicker";
 
 const CONTACT_ADDRESS = "cmorehouse@aipisolutions.com";
@@ -316,7 +317,7 @@ function IntakeSteps({
                 <input {...bind("website")} type="url" className={inputClassName} autoComplete="url" placeholder="example.com" />
               </Field>
               <Field id="di-country" label="Country" error={errorFor("country")}>
-                <SelectInput
+                <SearchableSelect
                   id="di-country"
                   value={data.country}
                   onChange={(value) => setField("country", value)}
