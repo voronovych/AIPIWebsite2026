@@ -38,6 +38,7 @@ function sanitizeFilename(filename: string): string {
 }
 
 function buildRawMessage(
+  to: string,
   subject: string,
   text: string,
   replyTo: string | undefined,
@@ -48,7 +49,7 @@ function buildRawMessage(
 
   const headers = [
     `From: ${encodeHeader(FROM_DISPLAY)} <${FROM_ADDRESS}>`,
-    `To: ${TO_ADDRESS}`,
+    `To: ${to}`,
     ...(replyTo ? [`Reply-To: ${replyTo}`] : []),
     `Subject: ${encodeHeader(subject)}`,
     "MIME-Version: 1.0",
@@ -75,16 +76,18 @@ function buildRawMessage(
 }
 
 /**
- * Sends a form submission notification to the AiPi intake address.
- * Throws if SES rejects the message, so callers can surface a failure to the
- * visitor rather than silently dropping their enquiry.
+ * Sends a form submission notification to the AiPi intake address, or to
+ * `to` when given. Throws if SES rejects the message, so callers can surface a
+ * failure to the visitor rather than silently dropping their enquiry.
  */
 export async function sendFormEmail({
+  to = TO_ADDRESS,
   subject,
   text,
   replyTo,
   attachment,
 }: {
+  to?: string;
   subject: string;
   text: string;
   replyTo?: string;
@@ -93,12 +96,12 @@ export async function sendFormEmail({
   const command = attachment
     ? new SendEmailCommand({
         FromEmailAddress: FROM_ADDRESS,
-        Destination: { ToAddresses: [TO_ADDRESS] },
-        Content: { Raw: { Data: buildRawMessage(subject, text, replyTo, attachment) } },
+        Destination: { ToAddresses: [to] },
+        Content: { Raw: { Data: buildRawMessage(to, subject, text, replyTo, attachment) } },
       })
     : new SendEmailCommand({
         FromEmailAddress: `${encodeHeader(FROM_DISPLAY)} <${FROM_ADDRESS}>`,
-        Destination: { ToAddresses: [TO_ADDRESS] },
+        Destination: { ToAddresses: [to] },
         ...(replyTo ? { ReplyToAddresses: [replyTo] } : {}),
         Content: {
           Simple: {
