@@ -21,6 +21,7 @@ import {
   errorClassName,
   errorProps,
   inputClassName,
+  selectClassName,
 } from "./Field";
 
 export const SEARCH_INPUT_ID = "di-search";
@@ -138,7 +139,7 @@ function ToolEditor({
             ref={(element) => {
               if (!askName) firstInputRef.current = element;
             }}
-            className={inputClassName}
+            className={selectClassName}
             value={draft.startYear}
             onChange={(event) => update("startYear", event.target.value)}
           >
@@ -151,7 +152,7 @@ function ToolEditor({
         <Field id={`${idPrefix}-end`} label="Until">
           <select
             id={`${idPrefix}-end`}
-            className={inputClassName}
+            className={selectClassName}
             value={draft.endYear}
             onChange={(event) => update("endYear", event.target.value)}
           >

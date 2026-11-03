@@ -36,6 +36,7 @@ import {
   hintClassName,
   inputClassName,
   labelClassName,
+  selectClassName,
 } from "./Field";
 import SearchableSelect from "./SearchableSelect";
 import SystemsPicker, { SEARCH_INPUT_ID } from "./SystemsPicker";
@@ -61,7 +62,7 @@ const STEP_COPY = [
 
 const NETWORK_ERROR = `We could not reach the server. Please check your connection and try again, or email ${CONTACT_ADDRESS}.`;
 
-type Draft = { data: IntakeData; step: number; furthest: number };
+type Draft = { data: IntakeData; step: number };
 
 // Drafts are a convenience so a long form survives a reload; storage can be
 // unavailable (private browsing, blocked site data), so failures are ignored.
@@ -71,11 +72,9 @@ function readDraft(): Draft | null {
     if (!raw) return null;
     const parsed = JSON.parse(raw);
     if (!parsed || typeof parsed !== "object" || !parsed.data) return null;
-    const last = STEPS.length - 1;
     return {
       data: { ...EMPTY_INTAKE, ...parsed.data },
-      step: Math.min(Number(parsed.step) || 0, last),
-      furthest: Math.min(Number(parsed.furthest) || 0, last),
+      step: Math.min(Number(parsed.step) || 0, STEPS.length - 1),
     };
   } catch {
     return null;
@@ -125,7 +124,6 @@ function IntakeSteps({
 }) {
   const [data, setData] = useState<IntakeData>(draft?.data ?? EMPTY_INTAKE);
   const [step, setStep] = useState(draft?.step ?? 0);
-  const [furthest, setFurthest] = useState(draft?.furthest ?? 0);
   const [fieldError, setFieldError] = useState<IntakeFieldError | null>(null);
   const [formError, setFormError] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -134,8 +132,8 @@ function IntakeSteps({
   const headingRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
-    if (ready && !submitted) writeDraft({ data, step, furthest });
-  }, [data, step, furthest, ready, submitted]);
+    if (ready && !submitted) writeDraft({ data, step });
+  }, [data, step, ready, submitted]);
 
   function setField<K extends IntakeField>(field: K, value: IntakeData[K]) {
     setData((current) => ({ ...current, [field]: value }));
@@ -174,10 +172,19 @@ function IntakeSteps({
     event.preventDefault();
     if (submitting) return;
 
-    const invalid = validateStep(step, data);
-    if (invalid) {
+    const isLastStep = step === STEPS.length - 1;
+    // Continue checks only this step. Submit checks every step, since the
+    // tabs let visitors move ahead without finishing earlier ones.
+    const stepsToCheck = isLastStep ? STEPS.map((_, index) => index) : [step];
+    const problem = stepsToCheck
+      .map((index) => ({ index, invalid: validateStep(index, data) }))
+      .find(({ invalid }) => invalid);
+
+    if (problem?.invalid) {
+      const { invalid } = problem;
       setFormError("");
       setFieldError(invalid);
+      setStep(problem.index);
       requestAnimationFrame(() => {
         const element = document.getElementById(inputId(invalid.field));
         element?.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -186,8 +193,7 @@ function IntakeSteps({
       return;
     }
 
-    if (step < STEPS.length - 1) {
-      setFurthest((current) => Math.max(current, step + 1));
+    if (!isLastStep) {
       goToStep(step + 1);
       return;
     }
@@ -249,19 +255,20 @@ function IntakeSteps({
     <div ref={cardRef} className="border border-[#e5e7eb] bg-white">
       <ol aria-label="Progress" className="flex border-b border-[#e5e7eb]">
         {STEPS.map((name, index) => {
-          const state = index === step ? "current" : index <= furthest ? "done" : "todo";
+          const state =
+            index === step ? "current" : validateStep(index, data) ? "todo" : "done";
           return (
             <li key={name} className="flex-1" aria-current={index === step ? "step" : undefined}>
               <button
                 type="button"
-                disabled={index > furthest || submitting}
+                disabled={submitting}
                 onClick={() => goToStep(index)}
                 className={`flex w-full items-center justify-center gap-1.5 border-b-2 px-2 py-4 text-xs font-medium sm:text-sm ${
                   state === "current"
                     ? "border-[#1d4ed8] text-[#0c1425]"
                     : state === "done"
                       ? "border-transparent text-[#1d4ed8] hover:text-[#1e40af]"
-                      : "border-transparent text-[#9ca3af]"
+                      : "border-transparent text-[#6b7280] hover:text-[#0c1425]"
                 } disabled:cursor-default`}
               >
                 {state === "done" && (
@@ -345,7 +352,7 @@ function IntakeSteps({
                   <select
                     id="di-startYear"
                     aria-label="Starting year"
-                    className={inputClassName}
+                    className={selectClassName}
                     value={data.startYear}
                     onChange={(event) => setField("startYear", event.target.value)}
                     {...(errorFor("startYear") ? { "aria-invalid": true, "aria-describedby": "di-period-err" } : {})}
@@ -358,7 +365,7 @@ function IntakeSteps({
                   <select
                     id="di-endYear"
                     aria-label="Ending year"
-                    className={inputClassName}
+                    className={selectClassName}
                     value={data.endYear}
                     onChange={(event) => setField("endYear", event.target.value)}
                     {...(errorFor("endYear") ? { "aria-invalid": true, "aria-describedby": "di-period-err" } : {})}
@@ -404,7 +411,7 @@ function IntakeSteps({
               <Field id="di-industry" label="Industry" error={errorFor("industry")}>
                 <select
                   id="di-industry"
-                  className={inputClassName}
+                  className={selectClassName}
                   value={data.industry}
                   onChange={(event) => setField("industry", event.target.value)}
                   {...errorProps("di-industry", errorFor("industry"))}
