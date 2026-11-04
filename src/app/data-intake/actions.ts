@@ -5,8 +5,10 @@ import { randomUUID } from "node:crypto";
 import {
   type IntakeData,
   type IntakeTool,
+  MAX_LENGTH,
   MAX_TOOLS,
   PRESENT,
+  TOOL_MAX_LENGTH,
   getToolName,
   validateIntake,
 } from "@/utils/dataIntake";
@@ -38,12 +40,12 @@ function parseTool(input: unknown): IntakeTool {
   const source = isRecord(input) ? input : {};
   return {
     category: readString(source, "category", 100),
-    item: readString(source, "item", 200),
-    customName: readString(source, "customName", 200),
+    item: readString(source, "item", TOOL_MAX_LENGTH.item),
+    customName: readString(source, "customName", TOOL_MAX_LENGTH.customName),
     startYear: readString(source, "startYear", 10),
     endYear: readString(source, "endYear", 10),
-    contents: readString(source, "contents", 1000),
-    size: readString(source, "size", 100),
+    contents: readString(source, "contents", TOOL_MAX_LENGTH.contents),
+    size: readString(source, "size", TOOL_MAX_LENGTH.size),
     canExport: readString(source, "canExport", 20),
   };
 }
@@ -56,29 +58,29 @@ function parseIntakeData(input: unknown): IntakeData {
     : [];
 
   return {
-    firstName: readString(source, "firstName", 100),
-    lastName: readString(source, "lastName", 100),
-    email: readString(source, "email", 254),
-    phone: readString(source, "phone", 50),
-    role: readString(source, "role", 200),
-    companyName: readString(source, "companyName", 200),
-    website: readString(source, "website", 300),
+    firstName: readString(source, "firstName", MAX_LENGTH.firstName),
+    lastName: readString(source, "lastName", MAX_LENGTH.lastName),
+    email: readString(source, "email", MAX_LENGTH.email),
+    phone: readString(source, "phone", MAX_LENGTH.phone),
+    role: readString(source, "role", MAX_LENGTH.role),
+    companyName: readString(source, "companyName", MAX_LENGTH.companyName),
+    website: readString(source, "website", MAX_LENGTH.website),
     country: readString(source, "country", 100),
-    description: readString(source, "description", 5000),
+    description: readString(source, "description", MAX_LENGTH.description),
     startYear: readString(source, "startYear", 10),
     endYear: readString(source, "endYear", 10),
     status: readString(source, "status", 100),
-    fte: readString(source, "fte", 20),
-    ftePeak: readString(source, "ftePeak", 20),
-    contractors: readString(source, "contractors", 20),
+    fte: readString(source, "fte", MAX_LENGTH.fte),
+    ftePeak: readString(source, "ftePeak", MAX_LENGTH.ftePeak),
+    contractors: readString(source, "contractors", MAX_LENGTH.contractors),
     industry: readString(source, "industry", 100),
     revenue: readString(source, "revenue", 100),
     volume: readString(source, "volume", 100),
-    languages: readString(source, "languages", 500),
+    languages: readString(source, "languages", MAX_LENGTH.languages),
     transfer: readString(source, "transfer", 100),
     exportAbility: readString(source, "exportAbility", 100),
     heardFrom: readString(source, "heardFrom", 100),
-    notes: readString(source, "notes", 10000),
+    notes: readString(source, "notes", MAX_LENGTH.notes),
     tools,
     consent: source.consent === true,
   };
@@ -182,19 +184,27 @@ export async function submitDataIntake(
     console.error("Data intake submission failed to save:", error);
   }
 
+  const email = {
+    to: NOTIFY_ADDRESS,
+    subject: `Data intake from ${submission.companyName.replace(/\s+/g, " ")}`,
+    text: formatSubmission(submission, storedAt),
+  };
+
   try {
-    await sendFormEmail({
-      to: NOTIFY_ADDRESS,
-      subject: `Data intake from ${submission.companyName.replace(/\s+/g, " ")}`,
-      replyTo: submission.email,
-      text: formatSubmission(submission, storedAt),
-    });
+    await sendFormEmail({ ...email, replyTo: submission.email });
   } catch (error) {
-    console.error("Data intake submission failed to send:", error);
-    return {
-      ok: false,
-      error: `Something went wrong sending your answers. Please try again, or email ${NOTIFY_ADDRESS}.`,
-    };
+    // SES can refuse an unusual Reply-To address, and transient errors happen;
+    // the visitor's address is in the body, so try once more without it.
+    console.error("Data intake email failed; retrying without Reply-To:", error);
+    try {
+      await sendFormEmail(email);
+    } catch (retryError) {
+      console.error("Data intake submission failed to send:", retryError);
+      return {
+        ok: false,
+        error: `Something went wrong sending your answers. Please try again, or email ${NOTIFY_ADDRESS}.`,
+      };
+    }
   }
 
   return { ok: true };

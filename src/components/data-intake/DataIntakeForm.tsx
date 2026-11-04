@@ -7,6 +7,7 @@ import {
   useState,
   useSyncExternalStore,
 } from "react";
+import { unstable_isUnrecognizedActionError } from "next/navigation";
 
 import { type IntakeResult, submitDataIntake } from "@/app/data-intake/actions";
 import {
@@ -18,6 +19,7 @@ import {
   INDUSTRY_GROUPS,
   type IntakeData,
   type IntakeField,
+  MAX_LENGTH,
   PRESENT,
   REVENUE_OPTIONS,
   STATUS_OPTIONS,
@@ -39,11 +41,17 @@ import {
   selectClassName,
 } from "./Field";
 import SearchableSelect from "./SearchableSelect";
-import SystemsPicker, { SEARCH_INPUT_ID } from "./SystemsPicker";
+import SystemsPicker, {
+  SEARCH_INPUT_ID,
+  type ToolEditing,
+  focusEditor,
+  settleEditor,
+} from "./SystemsPicker";
 
 const CONTACT_ADDRESS = "cmorehouse@aipisolutions.com";
 const DRAFT_KEY = "aipi-data-intake-draft-v1";
 const YEARS = getYears();
+const END_YEARS = [PRESENT, ...YEARS];
 
 const STEP_COPY = [
   {
@@ -61,8 +69,29 @@ const STEP_COPY = [
 ];
 
 const NETWORK_ERROR = `We could not reach the server. Please check your connection and try again, or email ${CONTACT_ADDRESS}.`;
+// Server functions are tied to a deployment; a page left open across one
+// can't call the new version until it reloads.
+const STALE_PAGE_ERROR =
+  "This page was updated while you were filling it in. Please reload the page and click Submit again; your answers will still be there.";
 
 type Draft = { data: IntakeData; step: number };
+
+const TOOL_FIELDS = ["category", "item", "customName", "startYear", "endYear", "contents", "size", "canExport"];
+
+/** True when a saved draft has the shape the form renders; anything else is discarded. */
+function isIntakeData(value: Record<string, unknown>): value is IntakeData {
+  return (
+    Object.entries(EMPTY_INTAKE).every(([key, fallback]) =>
+      Array.isArray(fallback) ? Array.isArray(value[key]) : typeof value[key] === typeof fallback,
+    ) &&
+    (value.tools as unknown[]).every(
+      (tool) =>
+        typeof tool === "object" &&
+        tool !== null &&
+        TOOL_FIELDS.every((field) => typeof (tool as Record<string, unknown>)[field] === "string"),
+    )
+  );
+}
 
 // Drafts are a convenience so a long form survives a reload; storage can be
 // unavailable (private browsing, blocked site data), so failures are ignored.
@@ -72,9 +101,12 @@ function readDraft(): Draft | null {
     if (!raw) return null;
     const parsed = JSON.parse(raw);
     if (!parsed || typeof parsed !== "object" || !parsed.data) return null;
+    const data = { ...EMPTY_INTAKE, ...parsed.data };
+    if (!isIntakeData(data)) return null;
+    const step = Number(parsed.step);
     return {
-      data: { ...EMPTY_INTAKE, ...parsed.data },
-      step: Math.min(Number(parsed.step) || 0, STEPS.length - 1),
+      data,
+      step: Number.isInteger(step) ? Math.min(Math.max(step, 0), STEPS.length - 1) : 0,
     };
   } catch {
     return null;
@@ -128,6 +160,7 @@ function IntakeSteps({
   const [formError, setFormError] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [editingTool, setEditingTool] = useState<ToolEditing | null>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
 
@@ -145,11 +178,12 @@ function IntakeSteps({
   }
 
   /** Binds a text input to its field, with its id and error wiring. */
-  function bind(field: Exclude<IntakeField, "tools" | "consent">) {
+  function bind(field: keyof typeof MAX_LENGTH) {
     const id = inputId(field);
     return {
       id,
       value: data[field],
+      maxLength: MAX_LENGTH[field],
       onChange: (event: { target: { value: string } }) =>
         setField(field, event.target.value),
       ...errorProps(id, errorFor(field)),
@@ -173,11 +207,31 @@ function IntakeSteps({
     if (submitting) return;
 
     const isLastStep = step === STEPS.length - 1;
+    let candidate = data;
+
+    if (isLastStep) {
+      // A system still open in the editor is included if it's finished;
+      // otherwise the editor says what's missing, rather than it being dropped.
+      const settled = settleEditor(editingTool, data.tools);
+      if (!settled.ok) {
+        if (editingTool) setEditingTool({ ...editingTool, notice: settled.message });
+        setFormError("");
+        setFieldError(null);
+        focusEditor();
+        return;
+      }
+      if (settled.tools !== data.tools) {
+        candidate = { ...data, tools: settled.tools };
+        setData(candidate);
+      }
+      setEditingTool(null);
+    }
+
     // Continue checks only this step. Submit checks every step, since the
     // tabs let visitors move ahead without finishing earlier ones.
     const stepsToCheck = isLastStep ? STEPS.map((_, index) => index) : [step];
     const problem = stepsToCheck
-      .map((index) => ({ index, invalid: validateStep(index, data) }))
+      .map((index) => ({ index, invalid: validateStep(index, candidate) }))
       .find(({ invalid }) => invalid);
 
     if (problem?.invalid) {
@@ -203,10 +257,13 @@ function IntakeSteps({
 
     let result: IntakeResult;
     try {
-      result = await submitDataIntake(token, data);
+      result = await submitDataIntake(token, candidate);
     } catch (error) {
       console.error("Data intake submission failed:", error);
-      result = { ok: false, error: NETWORK_ERROR };
+      result = {
+        ok: false,
+        error: unstable_isUnrecognizedActionError(error) ? STALE_PAGE_ERROR : NETWORK_ERROR,
+      };
     }
 
     setSubmitting(false);
@@ -349,32 +406,26 @@ function IntakeSteps({
               <fieldset>
                 <legend className={labelClassName}>Operating period</legend>
                 <div className="grid grid-cols-2 gap-4">
-                  <select
+                  <SearchableSelect
                     id="di-startYear"
-                    aria-label="Starting year"
-                    className={selectClassName}
+                    ariaLabel="Starting year"
                     value={data.startYear}
-                    onChange={(event) => setField("startYear", event.target.value)}
-                    {...(errorFor("startYear") ? { "aria-invalid": true, "aria-describedby": "di-period-err" } : {})}
-                  >
-                    <option value="">Starting year</option>
-                    {YEARS.map((year) => (
-                      <option key={year}>{year}</option>
-                    ))}
-                  </select>
-                  <select
+                    onChange={(value) => setField("startYear", value)}
+                    placeholder="Starting year"
+                    options={YEARS}
+                    error={errorFor("startYear")}
+                    errorId="di-period-err"
+                  />
+                  <SearchableSelect
                     id="di-endYear"
-                    aria-label="Ending year"
-                    className={selectClassName}
+                    ariaLabel="Ending year"
                     value={data.endYear}
-                    onChange={(event) => setField("endYear", event.target.value)}
-                    {...(errorFor("endYear") ? { "aria-invalid": true, "aria-describedby": "di-period-err" } : {})}
-                  >
-                    <option value={PRESENT}>Present</option>
-                    {YEARS.map((year) => (
-                      <option key={year}>{year}</option>
-                    ))}
-                  </select>
+                    onChange={(value) => setField("endYear", value)}
+                    placeholder="Ending year"
+                    options={END_YEARS}
+                    error={errorFor("endYear")}
+                    errorId="di-period-err"
+                  />
                 </div>
                 <FieldError id="di-period" message={periodError} />
               </fieldset>
@@ -503,6 +554,8 @@ function IntakeSteps({
               <SystemsPicker
                 tools={data.tools}
                 onChange={(tools) => setField("tools", tools)}
+                editing={editingTool}
+                onEditingChange={setEditingTool}
                 error={errorFor("tools")}
               />
               <div>

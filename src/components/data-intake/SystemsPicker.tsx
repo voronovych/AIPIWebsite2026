@@ -1,12 +1,14 @@
 "use client";
 
-import { Fragment, useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
+import { flushSync } from "react-dom";
 
 import {
   CAN_EXPORT_OPTIONS,
   NOT_LISTED,
   PRESENT,
   TOOL_CATEGORIES,
+  TOOL_MAX_LENGTH,
   type IntakeTool,
   getToolName,
   getYears,
@@ -21,12 +23,14 @@ import {
   errorClassName,
   errorProps,
   inputClassName,
-  selectClassName,
 } from "./Field";
+import SearchableSelect from "./SearchableSelect";
 
 export const SEARCH_INPUT_ID = "di-search";
+export const TOOL_SAVE_ID = "di-tool-save";
 
 const YEARS = getYears();
+const END_YEARS = [PRESENT, ...YEARS];
 const MAX_RESULTS = 40;
 
 const linkButtonClassName =
@@ -36,7 +40,20 @@ const addedBadgeClassName =
 const itemButtonClassName =
   "flex w-full items-center gap-3 px-4 py-3 text-left text-sm text-[#0c1425] hover:bg-[#f9fafb] focus-visible:bg-[#f9fafb] focus-visible:outline-none";
 
-type Editing = { index: number | null; draft: IntakeTool; anchor: string };
+/**
+ * The system currently open in the editor. Held by the form rather than the
+ * picker so unsaved input survives switching steps.
+ */
+export type ToolEditing = {
+  /** Position in the added list, or null for a system not added yet. */
+  index: number | null;
+  draft: IntakeTool;
+  original: IntakeTool;
+  /** Where the editor is shown: under its list item or its added row. */
+  anchor: string;
+  /** Message shown in the editor, e.g. when Submit finds it unfinished. */
+  notice?: string;
+};
 
 function emptyTool(category: string, item: string): IntakeTool {
   return {
@@ -51,40 +68,71 @@ function emptyTool(category: string, item: string): IntakeTool {
   };
 }
 
+function toolIdPrefix(tool: IntakeTool): string {
+  return `tool-${tool.category}-${tool.item}`.replace(/[^a-z0-9]+/gi, "-").toLowerCase();
+}
+
+/**
+ * Resolves an open editor before moving on (Submit, or opening another
+ * system): untouched editors are dropped, finished changes are kept, and
+ * unfinished ones return the reason so nothing is silently lost.
+ */
+export function settleEditor(
+  editing: ToolEditing | null,
+  tools: IntakeTool[],
+): { ok: true; tools: IntakeTool[] } | { ok: false; message: string } {
+  if (!editing || JSON.stringify(editing.draft) === JSON.stringify(editing.original)) {
+    return { ok: true, tools };
+  }
+
+  const message = validateTool(editing.draft);
+  if (message) return { ok: false, message };
+
+  return {
+    ok: true,
+    tools:
+      editing.index === null
+        ? [...tools, editing.draft]
+        : tools.map((tool, index) => (index === editing.index ? editing.draft : tool)),
+  };
+}
+
+/** Moves focus to the open editor's Add/Save button, e.g. to show its notice. */
+export function focusEditor() {
+  const button = document.getElementById(TOOL_SAVE_ID);
+  button?.scrollIntoView({ behavior: "smooth", block: "center" });
+  button?.focus({ preventScroll: true });
+}
+
 function ToolEditor({
-  draft: initialDraft,
-  isNew,
+  editing,
+  onChange,
   onSave,
   onCancel,
 }: {
-  draft: IntakeTool;
-  isNew: boolean;
-  onSave: (tool: IntakeTool) => void;
+  editing: ToolEditing;
+  onChange: (editing: ToolEditing) => void;
+  onSave: () => void;
   onCancel: () => void;
 }) {
-  const [draft, setDraft] = useState(initialDraft);
   const [error, setError] = useState("");
-  const firstInputRef = useRef<HTMLInputElement | HTMLSelectElement | null>(null);
+  const { draft } = editing;
+  const isNew = editing.index === null;
   const askName = needsCustomName(draft);
-  const idPrefix = `tool-${draft.category}-${draft.item}`
-    .replace(/[^a-z0-9]+/gi, "-")
-    .toLowerCase();
-
-  useEffect(() => {
-    firstInputRef.current?.focus();
-  }, []);
+  const idPrefix = toolIdPrefix(draft);
+  const message = error || editing.notice;
 
   function update<K extends keyof IntakeTool>(key: K, value: IntakeTool[K]) {
-    setDraft((current) => ({ ...current, [key]: value }));
+    onChange({ ...editing, draft: { ...draft, [key]: value }, notice: undefined });
   }
 
   function save() {
-    const message = validateTool(draft);
-    if (message) {
-      setError(message);
+    const problem = validateTool(draft);
+    if (problem) {
+      setError(problem);
       return;
     }
-    onSave(draft);
+    onSave();
   }
 
   return (
@@ -121,46 +169,33 @@ function ToolEditor({
         <Field id={`${idPrefix}-name`} label="Which system?">
           <input
             id={`${idPrefix}-name`}
-            ref={(element) => {
-              firstInputRef.current = element;
-            }}
             className={inputClassName}
             value={draft.customName}
+            maxLength={TOOL_MAX_LENGTH.customName}
             onChange={(event) => update("customName", event.target.value)}
             placeholder="Name of the tool"
           />
         </Field>
       )}
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid gap-5 sm:grid-cols-2 sm:gap-4">
         <Field id={`${idPrefix}-start`} label="Used from">
-          <select
+          <SearchableSelect
             id={`${idPrefix}-start`}
-            ref={(element) => {
-              if (!askName) firstInputRef.current = element;
-            }}
-            className={selectClassName}
             value={draft.startYear}
-            onChange={(event) => update("startYear", event.target.value)}
-          >
-            <option value="">Start year</option>
-            {YEARS.map((year) => (
-              <option key={year}>{year}</option>
-            ))}
-          </select>
+            onChange={(value) => update("startYear", value)}
+            placeholder="Start year"
+            options={YEARS}
+          />
         </Field>
         <Field id={`${idPrefix}-end`} label="Until">
-          <select
+          <SearchableSelect
             id={`${idPrefix}-end`}
-            className={selectClassName}
             value={draft.endYear}
-            onChange={(event) => update("endYear", event.target.value)}
-          >
-            <option value={PRESENT}>Present</option>
-            {YEARS.map((year) => (
-              <option key={year}>{year}</option>
-            ))}
-          </select>
+            onChange={(value) => update("endYear", value)}
+            placeholder="End year"
+            options={END_YEARS}
+          />
         </Field>
       </div>
 
@@ -174,6 +209,7 @@ function ToolEditor({
           id={`${idPrefix}-contents`}
           className={inputClassName}
           value={draft.contents}
+          maxLength={TOOL_MAX_LENGTH.contents}
           onChange={(event) => update("contents", event.target.value)}
         />
       </Field>
@@ -184,6 +220,7 @@ function ToolEditor({
             id={`${idPrefix}-size`}
             className={inputClassName}
             value={draft.size}
+            maxLength={TOOL_MAX_LENGTH.size}
             placeholder="e.g. 35 GB"
             onChange={(event) => update("size", event.target.value)}
           />
@@ -199,13 +236,14 @@ function ToolEditor({
         </Field>
       </div>
 
-      {error && (
+      {message && (
         <p role="alert" className={errorClassName}>
-          {error}
+          {message}
         </p>
       )}
 
       <button
+        id={TOOL_SAVE_ID}
         type="button"
         onClick={save}
         className="w-full bg-[#1d4ed8] py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1e40af]"
@@ -219,16 +257,20 @@ function ToolEditor({
 export default function SystemsPicker({
   tools,
   onChange,
+  editing,
+  onEditingChange,
   error,
 }: {
   tools: IntakeTool[];
   onChange: (tools: IntakeTool[]) => void;
+  editing: ToolEditing | null;
+  onEditingChange: (editing: ToolEditing | null) => void;
   error?: string;
 }) {
   const [query, setQuery] = useState("");
   const [openCategory, setOpenCategory] = useState<string | null>(null);
-  const [editing, setEditing] = useState<Editing | null>(null);
   const normalizedQuery = query.trim().toLowerCase();
+  const trimmedQuery = query.trim();
 
   const results = useMemo(
     () =>
@@ -246,6 +288,32 @@ export default function SystemsPicker({
     [normalizedQuery],
   );
 
+  /** Opens an editor, first keeping or flagging whatever was open before. */
+  function startEditing(next: ToolEditing) {
+    // Already open: keep its unsaved input rather than reopening it empty.
+    if (editing?.anchor === next.anchor) {
+      focusEditor();
+      return;
+    }
+
+    const settled = settleEditor(editing, tools);
+    if (!settled.ok) {
+      if (editing) onEditingChange({ ...editing, notice: settled.message });
+      focusEditor();
+      return;
+    }
+    // Finished changes are kept. New systems are appended, so the indexes
+    // of existing ones (and of `next`) don't move. Rendered synchronously so
+    // focus moves now, not a frame later when the visitor may be typing.
+    flushSync(() => {
+      if (settled.tools !== tools) onChange(settled.tools);
+      onEditingChange(next);
+    });
+
+    const firstField = needsCustomName(next.draft) ? "name" : "start";
+    document.getElementById(`${toolIdPrefix(next.draft)}-${firstField}`)?.focus();
+  }
+
   /** "Other …" entries can be added many times; anything else opens its existing entry. */
   function openItem(category: string, item: string) {
     const index = needsCustomName({ category, item })
@@ -253,43 +321,52 @@ export default function SystemsPicker({
       : tools.findIndex((tool) => tool.category === category && tool.item === item);
 
     if (index >= 0) {
-      setEditing({ index, draft: tools[index], anchor: `added::${index}` });
+      startEditing({ index, draft: tools[index], original: tools[index], anchor: `added::${index}` });
     } else {
-      setEditing({
-        index: null,
-        draft: emptyTool(category, item),
-        anchor: `${category}::${item}`,
-      });
+      const draft = emptyTool(category, item);
+      startEditing({ index: null, draft, original: draft, anchor: `${category}::${item}` });
     }
   }
 
-  function saveTool(tool: IntakeTool) {
-    if (!editing) return;
-    onChange(
-      editing.index === null
-        ? [...tools, tool]
-        : tools.map((existing, index) => (index === editing.index ? tool : existing)),
-    );
-    setEditing(null);
+  function saveEditing() {
+    const settled = settleEditor(editing, tools);
+    if (settled.ok && settled.tools !== tools) onChange(settled.tools);
+    onEditingChange(null);
   }
 
   function removeTool(index: number) {
     onChange(tools.filter((_, current) => current !== index));
-    setEditing(null);
+
+    // Keep an editor open on another system, pointing at its new position.
+    if (editing?.index === index) {
+      onEditingChange(null);
+    } else if (editing?.index != null && editing.index > index) {
+      onEditingChange({ ...editing, index: editing.index - 1, anchor: `added::${editing.index - 1}` });
+    }
   }
 
+  const editor = editing && (
+    <ToolEditor
+      editing={editing}
+      onChange={onEditingChange}
+      onSave={saveEditing}
+      onCancel={() => onEditingChange(null)}
+    />
+  );
+
+  // The editor normally sits under the item that opened it. If that item is
+  // no longer shown (search changed, category collapsed, step revisited),
+  // show it above the list so unsaved input stays visible.
+  const anchorShown =
+    !!editing &&
+    (editing.index !== null ||
+      (normalizedQuery
+        ? editing.anchor === `${NOT_LISTED}::${trimmedQuery}` ||
+          results.some(({ category, item }) => editing.anchor === `${category}::${item}`)
+        : editing.anchor.startsWith(`${openCategory}::`)));
+
   function editorSlot(anchor: string) {
-    if (editing?.anchor !== anchor) return null;
-    return (
-      <li>
-        <ToolEditor
-          draft={editing.draft}
-          isNew={editing.index === null}
-          onSave={saveTool}
-          onCancel={() => setEditing(null)}
-        />
-      </li>
-    );
+    return editing?.anchor === anchor && anchorShown ? <li>{editor}</li> : null;
   }
 
   function itemRow(category: string, item: string, showCategory: boolean) {
@@ -320,8 +397,6 @@ export default function SystemsPicker({
     );
   }
 
-  const trimmedQuery = query.trim();
-
   return (
     <div className="space-y-6">
       {tools.length > 0 && (
@@ -346,7 +421,7 @@ export default function SystemsPicker({
                     type="button"
                     className={linkButtonClassName}
                     onClick={() =>
-                      setEditing({ index, draft: tool, anchor: `added::${index}` })
+                      startEditing({ index, draft: tool, original: tool, anchor: `added::${index}` })
                     }
                   >
                     Edit
@@ -381,6 +456,7 @@ export default function SystemsPicker({
             className={`${inputClassName} pl-11`}
             placeholder="Search systems"
             value={query}
+            maxLength={TOOL_MAX_LENGTH.item}
             onChange={(event) => setQuery(event.target.value)}
             onKeyDown={(event) => {
               if (event.key === "Enter") event.preventDefault();
@@ -390,6 +466,10 @@ export default function SystemsPicker({
         </div>
         <FieldError id={SEARCH_INPUT_ID} message={error} />
       </div>
+
+      {editing && !anchorShown && (
+        <div className="border border-[#e5e7eb]">{editor}</div>
+      )}
 
       {normalizedQuery ? (
         <ul className="divide-y divide-[#e5e7eb] border border-[#e5e7eb]">

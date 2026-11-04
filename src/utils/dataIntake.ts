@@ -11,6 +11,35 @@ export const PRESENT = "Present";
 export const NOT_LISTED = "Not listed";
 export const MAX_TOOLS = 150;
 
+/**
+ * Longest accepted value for each free-text field. The inputs enforce these
+ * and the server trims to them, so nothing is cut off without the visitor
+ * seeing it.
+ */
+export const MAX_LENGTH = {
+  firstName: 100,
+  lastName: 100,
+  email: 254,
+  phone: 50,
+  role: 200,
+  companyName: 200,
+  website: 300,
+  description: 5000,
+  fte: 20,
+  ftePeak: 20,
+  contractors: 20,
+  languages: 500,
+  notes: 10000,
+} as const;
+
+export const TOOL_MAX_LENGTH = {
+  /** Also the search box, whose text names a system that isn't listed. */
+  item: 200,
+  customName: 200,
+  contents: 1000,
+  size: 100,
+} as const;
+
 const FIRST_YEAR = 1950;
 
 /** Current year down to 1950, newest first. */
@@ -708,8 +737,16 @@ export const EMPTY_INTAKE: IntakeData = {
   consent: false,
 };
 
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+// ASCII only, with no stray dots or trailing punctuation: the address is
+// used as the email's Reply-To, and SES rejects anything else.
+const EMAIL_PATTERN =
+  /^[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?\.)+[A-Za-z]{2,}$/;
 const COUNT_PATTERN = /^\d{1,7}$/;
+
+/** A head count; thousands separators such as "1,200" are fine. */
+function isCount(value: string): boolean {
+  return COUNT_PATTERN.test(value.replace(/[\s,]/g, ""));
+}
 
 function isBlank(value: string): boolean {
   return !value.trim();
@@ -764,7 +801,8 @@ export function validateStep(step: number, data: IntakeData): FieldError | null 
   if (step === 0) {
     if (isBlank(data.firstName)) return fail("firstName", "Please add your first name.");
     if (isBlank(data.lastName)) return fail("lastName", "Please add your last name.");
-    if (!EMAIL_PATTERN.test(data.email.trim())) {
+    const email = data.email.trim();
+    if (email.length > MAX_LENGTH.email || !EMAIL_PATTERN.test(email)) {
       return fail("email", "Please enter a valid work email.");
     }
     if (isBlank(data.companyName)) return fail("companyName", "Please add your company name.");
@@ -787,13 +825,13 @@ export function validateStep(step: number, data: IntakeData): FieldError | null 
     if (!STATUS_OPTIONS.includes(data.status)) {
       return fail("status", "Please choose the company’s operating status.");
     }
-    if (!COUNT_PATTERN.test(data.fte.trim())) {
+    if (!isCount(data.fte)) {
       return fail("fte", "Please enter the number of current full-time employees (0 if none).");
     }
-    if (data.ftePeak.trim() && !COUNT_PATTERN.test(data.ftePeak.trim())) {
+    if (data.ftePeak.trim() && !isCount(data.ftePeak)) {
       return fail("ftePeak", "Peak full-time employees should be a whole number.");
     }
-    if (data.contractors.trim() && !COUNT_PATTERN.test(data.contractors.trim())) {
+    if (data.contractors.trim() && !isCount(data.contractors)) {
       return fail("contractors", "Contractors should be a whole number.");
     }
     if (!INDUSTRIES.includes(data.industry)) return fail("industry", "Please choose an industry.");
