@@ -36,16 +36,24 @@ export default function Footer() {
             8230 Leesburg Pike, Suite 660, Vienna, VA 22182
           </p>
         </div>
-        <div className="flex items-center justify-between py-6">
+        <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 py-6">
           <p className="text-sm text-white/30">
             &copy; 2026 AiPi Solutions. All rights reserved.
           </p>
-          <Link
-            href="/privacy-policy"
-            className="text-sm text-white/30 hover:text-white transition-colors"
-          >
-            Privacy Policy
-          </Link>
+          <nav className="flex flex-wrap gap-x-6 gap-y-2">
+            <Link
+              href="/privacy-policy"
+              className="text-sm text-white/30 hover:text-white transition-colors"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/terms"
+              className="text-sm text-white/30 hover:text-white transition-colors"
+            >
+              Terms of Service
+            </Link>
+          </nav>
         </div>
       </div>
     </footer>
