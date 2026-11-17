@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: "Terms of Service for automated patent analysis reports from AiPi Solutions.",
+  description: "Terms of Service for aipisolutions.com, operated by Actionable Intellectual Property Intelligence LLC (AiPi Solutions).",
 };
 
 export default function TermsPage() {
@@ -11,70 +11,53 @@ export default function TermsPage() {
       <section className="bg-[#0c1425] pt-28 pb-16 sm:pt-36 sm:pb-20">
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
           <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            {"Terms of Service — AiPi Reports"}
+            {"Terms of Service"}
           </h1>
           <p className="mt-6 text-base leading-7 text-white/60">
-            {"Effective date: October 28, 2026"}
+            {"Effective date: November 17, 2026"}
           </p>
         </div>
       </section>
 
       <section className="bg-white py-16 sm:py-24">
         <div className="mx-auto max-w-3xl px-6 lg:px-8">
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"These Terms of Service (\"Terms\") govern your request for and use of automated patent analysis reports (\"Reports\") offered by Actionable Intellectual Property Intelligence LLC, a Delaware limited liability company doing business as AiPi Solutions (\"AiPi,\" \"we,\" \"us,\" or \"our\"), through aipisolutions.com (the \"Site\"). By submitting a Report request, you agree to these Terms. If you are acting on behalf of a company or other organization, you confirm that you are authorized to accept these Terms on its behalf, and \"you\" includes that organization."}</p>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"If you do not agree to these Terms, do not submit a request."}</p>
-          <h2 className="mt-10 text-xl font-semibold text-[#0c1425]">{"1. About the Reports"}</h2>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"1.1. AiPi is an intellectual property strategy and technology company. Reports are generated automatically by LeifAI, AiPi's proprietary automated patent analysis software, based on the information you provide in the intake form."}</p>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"1.2. Report types currently offered include Landscape, Infringer Finder, Freedom to Operate, Patentability, Invalidity, Commercialization, Portfolio, and similar analyses. The specific report types available may change from time to time."}</p>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"1.3. Reports are generated using LeifAI's default settings. Reports are not individually customized, and AiPi does not manually review or edit each Report before delivery unless separately agreed in writing."}</p>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"1.4. Reports are produced from automated searches of patent and related data sources and from AI-assisted analysis. Results depend on the information you submit and on the coverage, accuracy, and currency of the underlying data sources. Reports may be incomplete, may omit relevant documents, and may contain errors."}</p>
-          <h2 className="mt-10 text-xl font-semibold text-[#0c1425]">{"2. Not Legal Advice"}</h2>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"2.1. "}<strong className="font-semibold text-[#0c1425]">{"Reports are analytical and informational output produced by software. They are not legal advice and are not a legal opinion."}</strong>{" In particular, a Report is not a formal freedom-to-operate opinion, a validity or invalidity opinion, an infringement or non-infringement opinion, or a patentability opinion."}</p>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"2.2. Requesting or receiving a Report does not create an attorney-client relationship between you and AiPi or any of its personnel, including any personnel who are licensed attorneys. Information you submit through the Site is not protected by attorney-client privilege."}</p>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"2.3. You should not rely on a Report as the sole basis for any legal, business, investment, licensing, litigation, or product decision. For decisions with legal consequences, consult a qualified patent attorney or patent agent."}</p>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"2.4. If you would like to engage AiPi for advisory or other services beyond an automated Report, that engagement will be governed by a separate written agreement."}</p>
-          <h2 className="mt-10 text-xl font-semibold text-[#0c1425]">{"3. Order Acceptance"}</h2>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"AiPi may decline or cancel any request (for example, if the request is incomplete, unlawful, or outside the scope of what LeifAI can analyze)."}</p>
-          <h2 className="mt-10 text-xl font-semibold text-[#0c1425]">{"4. Your Responsibilities"}</h2>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"4.1. You agree to provide accurate and complete information in the intake form, including a valid email address that you control."}</p>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"4.2. You represent that you have the right to submit the information you provide, and that submitting it to AiPi for the purpose of generating a Report does not violate any law, confidentiality obligation, or third-party right."}</p>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"4.3. You will not use the Site or Reports for any unlawful purpose, attempt to interfere with the Site or LeifAI, attempt to reverse-engineer the software, or use automated means to submit requests or extract data from the Site except as AiPi permits."}</p>
-          <h2 className="mt-10 text-xl font-semibold text-[#0c1425]">{"5. Delivery and Turnaround"}</h2>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"5.1. After your request is received, you will receive a confirmation email from noreply@aipisolutions.com. When your Report is complete, you will receive a second email containing a link to your Report."}</p>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"5.2. Reports are generated automatically, and "}<strong className="font-semibold text-[#0c1425]">{"turnaround time is not guaranteed."}</strong>{" Any timing estimate shown on the Site is a good-faith estimate only."}</p>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"5.3. Please check your spam or junk folder if you do not receive these emails. If you have not received your Report within a reasonable time, or if you believe generation failed, contact us at tech-admin@aipisolutions.com."}</p>
-          <h2 className="mt-10 text-xl font-semibold text-[#0c1425]">{"6. How Your Report Is Delivered — Link Access"}</h2>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"6.1. "}<strong className="font-semibold text-[#0c1425]">{"Your Report is delivered as a web page published at a unique link. Anyone who has the link can view the Report."}</strong>{" The Report is not protected by a password or login."}</p>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"6.2. You should treat the link as confidential. Share it only with people you intend to see the Report. AiPi is not responsible for access to your Report by anyone who obtains the link from you or from anyone you shared it with."}</p>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"6.3. If you believe your link has been shared without your authorization, contact us at tech-admin@aipisolutions.com. [OWNER TO CONFIRM: whether AiPi can disable or rotate a Report link on request, and how long Report links remain active.]"}</p>
-          <h2 className="mt-10 text-xl font-semibold text-[#0c1425]">{"7. Information You Submit"}</h2>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"7.1. "}<strong className="font-semibold text-[#0c1425]">{"Use."}</strong>{" AiPi uses the information you submit in the intake form (which may include unpublished or confidential invention information) to generate and deliver your Report, to communicate with you about your order, and to handle support requests. [OWNER / ATTORNEY TO CONFIRM: whether submitted information or Reports are used for any other purpose, such as improving LeifAI. If not, state so expressly here.]"}</p>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"7.2. "}<strong className="font-semibold text-[#0c1425]">{"Third-party processors."}</strong>{" To provide the Reports, AiPi relies on third-party service providers, including cloud hosting and email delivery providers, and AI model providers that process content to generate analysis. Your submitted information may be transmitted to and processed by these providers for that purpose. [ATTORNEY TO REVIEW: list or describe providers, and confirm their data-use and retention terms — e.g., whether AI providers retain or train on submitted content.]"}</p>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"7.3. "}<strong className="font-semibold text-[#0c1425]">{"Retention."}</strong>{" AiPi retains submitted information and Reports [for PERIOD / for as long as needed to provide the Report and meet legal, accounting, and dispute-resolution obligations — OWNER TO CONFIRM]. You may ask us to delete your submitted information by contacting tech-admin@aipisolutions.com; we will handle the request as described in our Privacy Policy and subject to legal retention requirements."}</p>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"7.4. "}<strong className="font-semibold text-[#0c1425]">{"Confidentiality and public disclosure."}</strong>{" AiPi will take reasonable measures to protect the information you submit. However, because the internet is not perfectly secure and Reports are delivered by link (see Section 6), AiPi cannot guarantee absolute security. "}<strong className="font-semibold text-[#0c1425]">{"Consider carefully before submitting unpublished invention details."}</strong>{" You are solely responsible for deciding whether submitting information could affect your patent rights (for example, questions about public disclosure or confidentiality under patent law), and you should consult a patent attorney if you are unsure. [ATTORNEY TO REVIEW.]"}</p>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"7.5. "}<strong className="font-semibold text-[#0c1425]">{"Privacy Policy."}</strong>{" Our Privacy Policy, available at aipisolutions.com/privacy-policy, also applies to personal information you provide. If there is a conflict between these Terms and the Privacy Policy regarding personal information, [ATTORNEY TO DETERMINE which controls]."}</p>
-          <h2 className="mt-10 text-xl font-semibold text-[#0c1425]">{"8. Ownership and License"}</h2>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"8.1. "}<strong className="font-semibold text-[#0c1425]">{"Your materials."}</strong>{" You keep all rights you have in the information you submit. You grant AiPi a limited, non-exclusive license to use that information as described in Section 7."}</p>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"8.2. "}<strong className="font-semibold text-[#0c1425]">{"Reports."}</strong>{" AiPi grants you a non-exclusive, non-transferable, perpetual license to use your Report for your own internal business purposes, including sharing it with your advisors, investors, and prospective partners. [OWNER TO DECIDE: whether customers may republish or resell Reports, or whether AiPi should instead assign ownership of the Report to the customer.]"}</p>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"8.3. "}<strong className="font-semibold text-[#0c1425]">{"AiPi property."}</strong>{" AiPi retains all rights in LeifAI, the Site, and its software, methods, templates, and report formats. Public patent documents and data cited in a Report remain subject to their own rights, if any."}</p>
-          <h2 className="mt-10 text-xl font-semibold text-[#0c1425]">{"9. Disclaimer of Warranties"}</h2>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"TO THE FULLEST EXTENT PERMITTED BY LAW, REPORTS, THE SITE, AND LEIFAI ARE PROVIDED \"AS IS\" AND \"AS AVAILABLE.\" AIPI DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING ANY IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT. AIPI DOES NOT WARRANT THAT ANY REPORT IS ACCURATE, COMPLETE, OR CURRENT; THAT IT IDENTIFIES ALL RELEVANT PATENTS, PRIOR ART, OR PARTIES; OR THAT ANY OUTCOME (SUCH AS PATENT GRANT, ENFORCEABILITY, OR FREEDOM FROM INFRINGEMENT CLAIMS) WILL OCCUR."}</p>
-          <h2 className="mt-10 text-xl font-semibold text-[#0c1425]">{"10. Limitation of Liability"}</h2>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"10.1. TO THE FULLEST EXTENT PERMITTED BY LAW, AIPI WILL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES, OR FOR ANY LOSS OF PROFITS, REVENUE, BUSINESS, DATA, OR GOODWILL, OR FOR COSTS OF LITIGATION OR LOSS OF PATENT OR OTHER IP RIGHTS, ARISING OUT OF OR RELATED TO THE REPORTS OR THESE TERMS, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES."}</p>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"10.2. TO THE FULLEST EXTENT PERMITTED BY LAW, AIPI'S TOTAL LIABILITY ARISING OUT OF OR RELATED TO A REPORT OR THESE TERMS WILL NOT EXCEED THE AMOUNT YOU PAID FOR THE REPORT GIVING RISE TO THE CLAIM. [ATTORNEY TO REVIEW cap amount.]"}</p>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"10.3. Some jurisdictions do not allow certain disclaimers or limitations, so some of the above may not apply to you."}</p>
-          <h2 className="mt-10 text-xl font-semibold text-[#0c1425]">{"11. Indemnification"}</h2>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"You agree to indemnify and hold harmless AiPi and its officers, employees, and agents from claims, losses, and expenses (including reasonable attorneys' fees) arising from information you submit in violation of these Terms, your misuse of a Report, or your violation of law or third-party rights. [ATTORNEY TO REVIEW scope.]"}</p>
-          <h2 className="mt-10 text-xl font-semibold text-[#0c1425]">{"12. Governing Law and Disputes"}</h2>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"These Terms are governed by the laws of [GOVERNING LAW / VENUE], without regard to conflict-of-law rules. Any dispute arising out of or relating to these Terms or a Report will be brought exclusively in the courts located in [GOVERNING LAW / VENUE], and you and AiPi consent to their jurisdiction. [ATTORNEY TO CONSIDER: informal dispute resolution step, arbitration, class-action waiver.]"}</p>
-          <h2 className="mt-10 text-xl font-semibold text-[#0c1425]">{"13. Changes to These Terms"}</h2>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"AiPi may update these Terms from time to time. The version in effect when you place an order applies to that order. Updated Terms will be posted on the Site with a new effective date."}</p>
-          <h2 className="mt-10 text-xl font-semibold text-[#0c1425]">{"14. General"}</h2>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"14.1. These Terms and the Privacy Policy are the entire agreement between you and AiPi regarding Reports, unless you and AiPi sign a separate written agreement that expressly overrides them."}</p>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"14.2. If any provision is found unenforceable, the remaining provisions remain in effect. AiPi's failure to enforce a provision is not a waiver. You may not assign these Terms without AiPi's written consent. AiPi is not liable for delays caused by events beyond its reasonable control."}</p>
-          <h2 className="mt-10 text-xl font-semibold text-[#0c1425]">{"15. Contact"}</h2>
+          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"These Terms of Service (\"Terms\") govern your access to and use of aipisolutions.com (the \"Site\"), operated by Actionable Intellectual Property Intelligence LLC, a Delaware limited liability company doing business as AiPi Solutions (\"AiPi,\" \"we,\" \"us,\" or \"our\"). By using the Site, you agree to these Terms. If you do not agree, do not use the Site."}</p>
+
+          <h2 className="mt-10 text-xl font-semibold text-[#0c1425]">{"1. Use of the Site"}</h2>
+          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"You may use the Site only for lawful purposes. You agree not to interfere with the operation or security of the Site, attempt to gain unauthorized access to the Site or its systems, introduce malicious code, or use automated means to submit forms or extract data from the Site except as AiPi permits."}</p>
+
+          <h2 className="mt-10 text-xl font-semibold text-[#0c1425]">{"2. Intellectual Property"}</h2>
+          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"The Site and its content, including text, graphics, logos, and software, are owned by AiPi or its licensors and are protected by intellectual property laws. You may view and print pages from the Site for your own personal or internal business use. You may not otherwise copy, modify, distribute, or republish Site content without AiPi's prior written permission. AiPi's names and logos are trademarks of AiPi and may not be used without permission."}</p>
+
+          <h2 className="mt-10 text-xl font-semibold text-[#0c1425]">{"3. No Professional Advice"}</h2>
+          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"Content on the Site is provided for general information only. It is not legal, financial, or other professional advice, and you should not rely on it as such. Using the Site or contacting us through it does not create an attorney-client or other professional relationship with AiPi. Any services AiPi provides are governed by a separate written agreement."}</p>
+
+          <h2 className="mt-10 text-xl font-semibold text-[#0c1425]">{"4. Information You Submit"}</h2>
+          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"You agree that information you submit through the Site is accurate and that you have the right to submit it. Please do not send confidential or sensitive information through the Site's forms. Our Privacy Policy, available at aipisolutions.com/privacy-policy, explains how we handle personal information."}</p>
+
+          <h2 className="mt-10 text-xl font-semibold text-[#0c1425]">{"5. Third-Party Links"}</h2>
+          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"The Site may link to websites that AiPi does not operate. AiPi is not responsible for the content or practices of those websites, and a link does not imply endorsement."}</p>
+
+          <h2 className="mt-10 text-xl font-semibold text-[#0c1425]">{"6. Disclaimer of Warranties"}</h2>
+          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"TO THE FULLEST EXTENT PERMITTED BY LAW, THE SITE AND ITS CONTENT ARE PROVIDED \"AS IS\" AND \"AS AVAILABLE.\" AIPI DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING ANY IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT. AIPI DOES NOT WARRANT THAT THE SITE WILL BE UNINTERRUPTED, SECURE, OR ERROR-FREE, OR THAT ITS CONTENT IS ACCURATE, COMPLETE, OR CURRENT."}</p>
+
+          <h2 className="mt-10 text-xl font-semibold text-[#0c1425]">{"7. Limitation of Liability"}</h2>
+          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"TO THE FULLEST EXTENT PERMITTED BY LAW, AIPI WILL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES, OR FOR ANY LOSS OF PROFITS, REVENUE, BUSINESS, DATA, OR GOODWILL, ARISING OUT OF OR RELATED TO THE SITE OR THESE TERMS, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. AIPI'S TOTAL LIABILITY ARISING OUT OF OR RELATED TO THE SITE OR THESE TERMS WILL NOT EXCEED ONE HUNDRED U.S. DOLLARS (US $100). Some jurisdictions do not allow certain disclaimers or limitations, so some of the above may not apply to you."}</p>
+
+          <h2 className="mt-10 text-xl font-semibold text-[#0c1425]">{"8. Indemnification"}</h2>
+          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"You agree to indemnify and hold harmless AiPi and its officers, employees, and agents from claims, losses, and expenses (including reasonable attorneys' fees) arising from your misuse of the Site or your violation of these Terms, the law, or third-party rights."}</p>
+
+          <h2 className="mt-10 text-xl font-semibold text-[#0c1425]">{"9. Governing Law"}</h2>
+          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"These Terms are governed by the laws of the Commonwealth of Virginia, without regard to conflict-of-law rules. Any dispute arising out of or relating to these Terms or the Site will be brought exclusively in the state or federal courts located in Fairfax County, Virginia, and you and AiPi consent to their jurisdiction."}</p>
+
+          <h2 className="mt-10 text-xl font-semibold text-[#0c1425]">{"10. Changes to These Terms"}</h2>
+          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"AiPi may update these Terms from time to time. Updated Terms will be posted on the Site with a new effective date. Your continued use of the Site after an update means you accept the updated Terms."}</p>
+
+          <h2 className="mt-10 text-xl font-semibold text-[#0c1425]">{"11. General"}</h2>
+          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"These Terms and the Privacy Policy are the entire agreement between you and AiPi regarding the Site. If any provision is found unenforceable, the remaining provisions remain in effect. AiPi's failure to enforce a provision is not a waiver."}</p>
+
+          <h2 className="mt-10 text-xl font-semibold text-[#0c1425]">{"12. Contact"}</h2>
           <p className="mt-4 text-base leading-7 text-[#4b5563]">{"Actionable Intellectual Property Intelligence LLC (AiPi Solutions)"}<br />{"8230 Leesburg Pike, Suite 660, Vienna, VA 22182"}<br />{"Email: tech-admin@aipisolutions.com"}<br />{"Website: aipisolutions.com"}</p>
-          <p className="mt-4 text-base leading-7 text-[#4b5563]">{"Note: automated emails are sent from noreply@aipisolutions.com, which does not accept replies. Please use tech-admin@aipisolutions.com for all questions."}</p>
         </div>
       </section>
     </>
