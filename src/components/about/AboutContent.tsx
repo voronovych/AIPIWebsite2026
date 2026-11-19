@@ -14,6 +14,7 @@ import meteHeadshot from "@/assets/headshots/MeteOzmen.png";
 import drewHeadshot from "@/assets/headshots/DrewDavis.png";
 import alexHeadshot from "@/assets/headshots/AlexanderGalambos.png";
 import markHymanHeadshot from "@/assets/headshots/MarkHyman.jpg";
+import krimHeadshot from "@/assets/headshots/KrimNatirbov.jpg";
 import maxHeadshot from "@/assets/headshots/MaxMorehouse.jpg";
 import seanHeadshot from "@/assets/headshots/SeanLewis.jpg";
 import stephenHeadshot from "@/assets/headshots/StephenTung.jpg";
@@ -100,6 +101,12 @@ const bizDevTeam = [
     image: markHymanHeadshot,
   },
   {
+    name: "Krim Natirbov",
+    title: "Business Development Director",
+    bio: "Krim Natirbov is an international business consultant. He is Managing Director of Natir Associates LLC which advises companies on international business development and strategy. The firm’s clients include start-ups in fintech, cybersecurity, biotech, and logistics. Krim has lived in five countries from Europe to the Middle East. He is an avid reader of History and received his BA in World History from the University of California, Santa Cruz.",
+    image: krimHeadshot,
+  },
+  {
     name: "Drew Davis",
     title: "Senior VP of Worldwide Business Development",
     bio: "Oxford-educated COO and Chief of Staff with multi-sector organisational experience building teams to solve complex operational challenges.",
@@ -113,9 +120,6 @@ const bizDevTeam = [
   },
   {
     name: "Devin Perry",
-  },
-  {
-    name: "Krim Natirbov",
   },
 ];
 
