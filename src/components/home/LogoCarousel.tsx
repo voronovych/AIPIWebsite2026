@@ -21,6 +21,12 @@ import EmergentLogo from "@/assets/CompanyLogos/EmergentLogo.png";
 // To restore, uncomment this import and its row2 entry below.
 // import PolarisLogo from "@/assets/CompanyLogos/PolarisLogo.png";
 import BioSymetricsLogo from "@/assets/CompanyLogos/BioSymetricsLogo.png";
+import PonchoLogo from "@/assets/CompanyLogos/PonchoLogo.svg";
+import PrimiLogo from "@/assets/CompanyLogos/PrimiLogo.png";
+import ForthLogo from "@/assets/CompanyLogos/ForthLogo.svg";
+import ReavillMEDLogo from "@/assets/CompanyLogos/ReavillMEDLogo.png";
+import MissionPivotLogo from "@/assets/CompanyLogos/MissionPivotLogo.png";
+import SteadphastLogo from "@/assets/CompanyLogos/SteadphastLogo.svg";
 
 type LogoItem = { src: import("next/image").StaticImageData; alt: string } | { text: string };
 
@@ -32,9 +38,10 @@ const row1: LogoItem[] = [
   { src: ETCapitalLogo, alt: "ET Capital" },
   { src: APSLogo, alt: "APS" },
   { src: PhysicsLogicLogo, alt: "PhysicsLogic" },
-  { text: "Bugs For Birds" },
   { src: TellapureLogo, alt: "Tellapure" },
   { src: EmergentLogo, alt: "Emergent" },
+  { src: PonchoLogo, alt: "Poncho" },
+  { src: PrimiLogo, alt: "Primi" },
 ];
 
 const row2: LogoItem[] = [
@@ -45,8 +52,11 @@ const row2: LogoItem[] = [
   { src: CaliberLogo, alt: "Caliber" },
   { src: AccumontLogo, alt: "Accumont" },
   // { src: PolarisLogo, alt: "Polaris Partner Group" },
-  { text: "MissionPivot" },
+  { src: MissionPivotLogo, alt: "MissionPivot" },
   { src: BioSymetricsLogo, alt: "BioSymetrics" },
+  { src: ForthLogo, alt: "Forth" },
+  { src: ReavillMEDLogo, alt: "ReavillMED" },
+  { src: SteadphastLogo, alt: "Steadphast" },
 ];
 
 // Keep scroll speed constant as rows grow: 45s was tuned for 6 logos per row.

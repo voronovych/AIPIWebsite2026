@@ -95,7 +95,7 @@ export default function TechnologyContent() {
       <KnowledgeGraphSection />
 
       {/* ─── WEEKLY NEWSLETTER ─── */}
-      <section className="bg-[#f8fafc] py-16 sm:py-24">
+      <section id="newsletter" className="bg-[#f8fafc] py-16 sm:py-24 scroll-mt-16">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <NewsletterSection />
         </div>
