@@ -10,7 +10,7 @@ type Post = {
   date: string;
   category: string;
   excerpt: string;
-  image: string;
+  image?: string;
   featured?: boolean;
 };
 
@@ -24,10 +24,32 @@ const categories = [
 
 const posts: Post[] = [
   {
+    title: "AiPi Speaks at DC Live",
+    date: "September 15, 2026",
+    category: "Speaking Engagements",
+    featured: true,
+    excerpt:
+      "AiPi discussed how technology and patents can influence and otherwise facilitate founders' efforts in fundraising, getting to revenue, scaling revenue, securing channel partnerships, and ultimately exit.",
+  },
+  {
+    title: "AiPi Speaks at the NYC Single Family Office Forum",
+    date: "September 15, 2026",
+    category: "Speaking Engagements",
+    featured: true,
+    excerpt:
+      "AiPi spoke on how AI engines, including AiPi's own LeifAI platform, can influence investment decisions to achieve improved outcomes, and how the platform improves the chances of reaching revenue and other business goals.",
+  },
+  {
+    title: "LES 2023 Winds of Change Conference — Chicago, Illinois",
+    date: "October 2023",
+    category: "Speaking Engagements",
+    excerpt:
+      "AiPi sponsored the Licensing Executives Society's 2023 Winds of Change Conference and spoke on using AI tools to monetize patent portfolios.",
+  },
+  {
     title: "Eric Morehouse Speaks at University of Michigan's Ross School of Business",
     date: "November 16, 2022",
     category: "Speaking Engagements",
-    featured: true,
     excerpt:
       "Morehouse addressed 450 participants at the V1 Startup Fair on fundraising, revenue strategies, scaling, and founder exits. The presentation covered how early-stage companies can leverage patent strategy to accelerate growth and attract investment.",
     image:
@@ -229,7 +251,7 @@ export default function BlogContent() {
                     >
                       {post.excerpt}
                     </p>
-                    {isExpanded && (
+                    {isExpanded && post.image && (
                       <div className="mt-6 relative aspect-video rounded-lg overflow-hidden bg-[#f1f5f9]">
                         <Image
                           src={post.image}
@@ -295,7 +317,9 @@ export default function BlogContent() {
                   </div>
 
                   {isExpanded ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-[1fr_300px] gap-8">
+                    <div
+                      className={`grid grid-cols-1 gap-8 ${post.image ? "sm:grid-cols-[1fr_300px]" : ""}`}
+                    >
                       <div>
                         <h3 className="text-xl font-bold text-[#0c1425] leading-snug">
                           {post.title}
@@ -307,14 +331,16 @@ export default function BlogContent() {
                           Show less &rarr;
                         </span>
                       </div>
-                      <div className="relative aspect-square rounded-lg overflow-hidden bg-[#f1f5f9]">
-                        <Image
-                          src={post.image}
-                          alt={post.title}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
+                      {post.image && (
+                        <div className="relative aspect-square rounded-lg overflow-hidden bg-[#f1f5f9]">
+                          <Image
+                            src={post.image}
+                            alt={post.title}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      )}
                     </div>
                   ) : (
                     <>

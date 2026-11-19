@@ -111,6 +111,12 @@ const bizDevTeam = [
     bio: "Seasoned business development leader with deep expertise across European markets, connecting innovators with strategic opportunities.",
     image: alexHeadshot,
   },
+  {
+    name: "Devin Perry",
+  },
+  {
+    name: "Krim Natirbov",
+  },
 ];
 
 const analysisTeam = [
@@ -478,7 +484,7 @@ function TeamMemberCard({
   visible,
   delay,
 }: {
-  member: { name: string; title: string; subtitle?: string; bio?: string; image: typeof ericHeadshot; flip?: boolean; href?: string };
+  member: { name: string; title?: string; subtitle?: string; bio?: string; image?: typeof ericHeadshot; flip?: boolean; href?: string };
   visible: boolean;
   delay: number;
 }) {
@@ -488,17 +494,31 @@ function TeamMemberCard({
       style={{ transitionDelay: `${delay}ms` }}
     >
       <div className="relative overflow-hidden bg-[#f8fafc] aspect-[4/5] mb-5">
-        <Image
-          src={member.image}
-          alt={member.name}
-          fill
-          className={`object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-500 ${member.flip ? "-scale-x-100" : ""}`}
-        />
+        {member.image ? (
+          <Image
+            src={member.image}
+            alt={member.name}
+            fill
+            className={`object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-500 ${member.flip ? "-scale-x-100" : ""}`}
+          />
+        ) : (
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 flex items-center justify-center text-5xl font-bold tracking-tight text-[#0c1425]/15"
+          >
+            {member.name
+              .split(" ")
+              .map((part) => part[0])
+              .join("")}
+          </div>
+        )}
       </div>
       <h3 className="text-lg font-bold text-[#0c1425] group-hover:text-[#1d4ed8] transition-colors">{member.name}</h3>
-      <p className="text-sm font-medium text-[#1d4ed8] mt-0.5">
-        {member.title}
-      </p>
+      {member.title && (
+        <p className="text-sm font-medium text-[#1d4ed8] mt-0.5">
+          {member.title}
+        </p>
+      )}
       {member.subtitle && (
         <p className="text-sm text-[#6b7280] mt-0.5">{member.subtitle}</p>
       )}
@@ -545,10 +565,10 @@ function TeamSection() {
           ))}
         </div>
 
-        {/* Business Development Team */}
+        {/* Business and Finance Team */}
         <div className="text-center mt-20 mb-14">
           <h2 className="text-2xl font-bold tracking-tight text-[#0c1425] sm:text-3xl">
-            Business Development
+            Business and Finance
           </h2>
         </div>
 

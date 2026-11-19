@@ -94,6 +94,13 @@ export default function TechnologyContent() {
       {/* ─── KNOWLEDGE GRAPH VISUAL ─── */}
       <KnowledgeGraphSection />
 
+      {/* ─── WEEKLY NEWSLETTER ─── */}
+      <section className="bg-[#f8fafc] py-16 sm:py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <NewsletterSection />
+        </div>
+      </section>
+
       {/* ─── PLATFORM 2: AGRICULTURAL ANALYSIS ─── */}
       <section className="bg-white py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -597,6 +604,158 @@ function KnowledgeGraphSection() {
         </div>
       </div>
     </section>
+  );
+}
+
+function NewsletterSection() {
+  const { ref, visible } = useReveal();
+
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+    >
+      <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+        <div>
+          <span className="text-sm tracking-widest text-[#1d4ed8] uppercase">
+            Weekly Client Newsletter
+          </span>
+          <h2 className="mt-3 text-2xl font-bold tracking-tight text-[#0c1425] sm:text-3xl leading-tight">
+            The week&apos;s most relevant patent filings, delivered every week
+          </h2>
+          <p className="mt-4 text-base text-[#4b5563] leading-relaxed">
+            Each week, LeifAI compares your technology against that week&apos;s
+            new patent filings worldwide and sends you the handful that matter
+            most, so you see relevant activity in your space as it happens.
+          </p>
+
+          <div className="mt-8 space-y-4">
+            {[
+              {
+                title: "Relevant New Filings",
+                detail:
+                  "The most relevant new filings of the week, ranked in order of relevance to your technology.",
+              },
+              {
+                title: "Plain-Language Summaries",
+                detail:
+                  "Each filing comes with a short summary, its owner, and its key dates.",
+              },
+              {
+                title: "AI Read on Each Filing",
+                detail:
+                  "An AI assessment of patentability or validity for every filing listed.",
+              },
+              {
+                title: "Ownership Transfers",
+                detail:
+                  "The week's most relevant patent ownership transfers in your space.",
+              },
+            ].map((item, i) => (
+              <div
+                key={item.title}
+                className={`border-l-2 border-[#1d4ed8] pl-5 transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+                style={visible ? undefined : { transitionDelay: `${300 + i * 100}ms` }}
+              >
+                <h3 className="text-sm font-bold text-[#0c1425]">
+                  {item.title}
+                </h3>
+                <p className="mt-1 text-sm text-[#6b7280] leading-relaxed">
+                  {item.detail}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Newsletter preview mockup — sample data */}
+        <div
+          aria-hidden="true"
+          className="relative rounded-lg overflow-hidden border border-[#e5e7eb] shadow-lg bg-white"
+        >
+          {/* Browser chrome */}
+          <div className="bg-[#f1f5f9] px-4 py-2.5 flex items-center gap-2 border-b border-[#e5e7eb]">
+            <div className="flex gap-1.5">
+              <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
+              <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
+              <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
+            </div>
+            <div className="flex-1 mx-4 bg-white rounded px-3 py-1 text-[10px] text-[#9ca3af] text-center">
+              leif-ai.com/newsletter
+            </div>
+          </div>
+
+          {/* Dark header */}
+          <div className="bg-[#111c32] px-5 py-4">
+            <span className="text-xs font-bold text-white tracking-wide">
+              LeifAI
+            </span>
+            <p className="mt-3 text-base font-bold tracking-tight text-white leading-tight">
+              Sample Client: Robot Vacuum-Mop
+            </p>
+            <p className="mt-1 text-[10px] text-white/50">
+              Newsletter Snapshot &middot; November 3, 2026
+            </p>
+          </div>
+
+          {/* Body */}
+          <div className="px-5 py-4">
+            <p className="text-[11px] leading-4 text-[#4b5563]">
+              We compared your technology with 31,993 new filings. These 5
+              filings are the most relevant in order of relevance.
+            </p>
+
+            <div className="mt-3 space-y-3">
+              {[
+                {
+                  pub: "EP0000000B1",
+                  title: "Dust Collection Station and Automatic Cleaning System",
+                  assignee: "Example Robotics Co., Ltd.",
+                  label: "Invalidity",
+                  verdict: "Likely Valid",
+                  meta: "Newly granted · Granted 28 Oct 2026 · Priority 15 Dec 2021",
+                  summary:
+                    "Describes a dust collection station for cleaning robots, with a sealed dust bag, a fan creating negative pressure, and a baffle that closes the outlet when no bag is mounted.",
+                },
+                {
+                  pub: "US00000000A1",
+                  title: "Surface Cleaning Robot with Lifting Mop Assembly",
+                  assignee: "Sample Home Appliances Inc.",
+                  label: "Patentability",
+                  verdict: "Likely Patentable",
+                  meta: "Newly published · Published 29 Oct 2026 · Priority 2 May 2025",
+                  summary:
+                    "Describes a cleaning robot that raises its mop assembly when carpet is detected and lowers it again on hard floors.",
+                },
+              ].map((filing) => (
+                <div
+                  key={filing.pub}
+                  className="border border-[#e5e7eb] rounded px-4 py-3"
+                >
+                  <p className="text-[10px] font-mono text-[#1d4ed8]">
+                    {filing.pub}
+                  </p>
+                  <p className="mt-1 text-[11px] font-bold text-[#0c1425]">
+                    {filing.title}
+                  </p>
+                  <p className="mt-1 text-[10px] text-[#6b7280]">
+                    Assignee: {filing.assignee}
+                  </p>
+                  <p className="mt-1 text-[10px] font-semibold text-[#0c1425]">
+                    {filing.label}:{" "}
+                    <span className="text-green-600">{filing.verdict}</span>
+                  </p>
+                  <p className="mt-1 text-[9px] text-[#9ca3af]">{filing.meta}</p>
+                  <p className="mt-2 text-[10px] leading-4 text-[#4b5563]">
+                    {filing.summary}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
